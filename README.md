@@ -1,7 +1,7 @@
 ![BrightCoders Logo](img/logo-bc.png)
 
 # Nombre del proyecto
-Bethink
+Bethink.
 
 ## Problematica que atiende
 En la vida cotidiana una persona se enfrenta a una serie de actividades, recordatorios o notas que debe tomar y el organizarlas todo en un solo lugar suele 
