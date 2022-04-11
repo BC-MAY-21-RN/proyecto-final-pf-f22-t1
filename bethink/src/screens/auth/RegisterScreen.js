@@ -10,6 +10,8 @@ import {
   TouchableOpacity,
 } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
+import { ButtonRegister } from '../../components/Register/ButtonRegister';
+import { FormRegister } from '../../components/Register/FormRegister';
 
 export const RegisterScreen = ({navigation}) => {
   const windowHeight = Dimensions.get('window').height;
@@ -18,7 +20,7 @@ export const RegisterScreen = ({navigation}) => {
     <View style={styles.container}>
       <ScrollView showsVerticalScrollIndicator={false}>
         <View style={[styles.containerLogo, {height: splitScreen * 2}]}>
-          <Image source={require('../../imgs/logo.png')} />
+          <Image source={require('../../imgs/logo.png')} style={[styles.logo]}/>
         </View>
         <LinearGradient
           colors={['#FC5C7D', '#6A82FB']}
@@ -30,26 +32,8 @@ export const RegisterScreen = ({navigation}) => {
               style={styles.img}
             />
           </View>
-          <View style={styles.containerForm}>
-            <Text style={styles.label}>Name</Text>
-            <TextInput style={styles.input} />
-            <Text style={styles.label}>Email</Text>
-            <TextInput style={styles.input} />
-            <Text style={styles.label}>Password</Text>
-            <TextInput style={styles.input} />
-          </View>
-          <View style={styles.containerButtons}>
-            <TouchableOpacity style={styles.button}>
-              <Text style={styles.txtButton}>Sign up</Text>
-            </TouchableOpacity>
-            <TouchableOpacity style={[styles.button, styles.buttonGoogle]}>
-              <Image
-                source={require('../../imgs/google.png')}
-                style={styles.imgGoogle}
-              />
-              <Text style={styles.txtButton}>Sign up with Google</Text>
-            </TouchableOpacity>
-          </View>
+          <FormRegister/>
+          <ButtonRegister/>
           <View style={styles.containerAccount}>
             <Text>Already have an account?</Text>
             <Text
@@ -92,21 +76,6 @@ const styles = StyleSheet.create({
     height: 150,
     width: 150,
   },
-  containerForm: {
-    marginVertical: 15,
-  },
-  label: {
-    color: 'white',
-    fontWeight: 'bold',
-    fontSize: 18,
-  },
-  input: {
-    backgroundColor: 'white',
-    borderRadius: 10,
-    marginVertical: 5,
-    color: 'black',
-    padding: 10,
-  },
   containerButtons: {
     alignItems: 'center',
   },
@@ -142,4 +111,8 @@ const styles = StyleSheet.create({
     textDecorationLine: 'underline',
     marginLeft: 5,
   },
+  logo: {
+    maxHeight: 100,
+    maxWidth: 350,
+},
 });
