@@ -1,18 +1,29 @@
 import React from 'react';
 import {StyleSheet, TouchableOpacity, Text, Image, View} from 'react-native';
 
-export const ButtonLogin = () => {
+export const ButtonsAuth = ({txtBtn, txtBtnGoogle, form, navigation}) => {
+  /* use this for validations */
+  const {name, email, password} = form;
+  const currentScreen = navigation.getState().index;
+  const onAuth = () => {
+    if (currentScreen === 0) {
+      console.log('login');
+    } else {
+      console.log('register');
+    }
+  };
+
   return (
     <View style={styles.containerButtons}>
-      <TouchableOpacity style={styles.button}>
-        <Text style={styles.txtButton}>Log in</Text>
+      <TouchableOpacity style={styles.button} onPress={onAuth}>
+        <Text style={styles.txtButton}>{txtBtn}</Text>
       </TouchableOpacity>
       <TouchableOpacity style={[styles.button, styles.buttonGoogle]}>
         <Image
           source={require('../../imgs/google.png')}
           style={styles.imgGoogle}
         />
-        <Text style={styles.txtButton}>Log in with Google</Text>
+        <Text style={styles.txtButton}>{txtBtnGoogle}</Text>
       </TouchableOpacity>
     </View>
   );

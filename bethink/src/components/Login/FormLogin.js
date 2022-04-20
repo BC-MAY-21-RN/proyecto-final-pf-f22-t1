@@ -1,32 +1,24 @@
 import React from 'react';
-import {View, Text, TextInput, StyleSheet} from 'react-native';
+import {View, Text, TextInput} from 'react-native';
+import {formStyles} from '../auth/formStyles';
 
-export const FormLogin = () => {
+export const FormLogin = ({form, onChange}) => {
+  const {email, password} = form;
   return (
-    <View style={styles.containerForm}>
-      <Text style={styles.label}>Email</Text>
-      <TextInput style={styles.input} />
-      <Text style={styles.label}>Password</Text>
-      <TextInput style={styles.input} />
+    <View style={formStyles.containerForm}>
+      <Text style={formStyles.label}>Email</Text>
+      <TextInput
+        style={formStyles.input}
+        value={email}
+        onChangeText={value => onChange(value, 'email')}
+      />
+      <Text style={formStyles.label}>Password</Text>
+      <TextInput
+        style={formStyles.input}
+        secureTextEntry
+        value={password}
+        onChangeText={value => onChange(value, 'password')}
+      />
     </View>
   );
 };
-
-const styles = StyleSheet.create({
-  containerForm: {
-    marginVertical: 15,
-  },
-  label: {
-    color: 'white',
-    fontWeight: 'bold',
-    fontSize: 18,
-  },
-
-  input: {
-    backgroundColor: 'white',
-    borderRadius: 10,
-    marginVertical: 5,
-    color: 'black',
-    padding: 10,
-  },
-});
