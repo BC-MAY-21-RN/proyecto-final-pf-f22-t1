@@ -3,7 +3,7 @@ import {StyleSheet, TouchableOpacity, Text, Image, View} from 'react-native';
 
 export const ButtonsAuth = ({txtBtn, txtBtnGoogle, form, navigation}) => {
   /* use this for validations */
-  const {name, email, password} = form;
+  // const {name, email, password} = form;
   const currentScreen = navigation.getState().index;
   const onAuth = () => {
     if (currentScreen === 0) {
@@ -12,7 +12,6 @@ export const ButtonsAuth = ({txtBtn, txtBtnGoogle, form, navigation}) => {
       console.log('register');
     }
   };
-
   return (
     <View style={styles.containerButtons}>
       <TouchableOpacity style={styles.button} onPress={onAuth}>
