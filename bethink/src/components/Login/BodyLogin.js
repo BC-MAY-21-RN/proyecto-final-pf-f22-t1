@@ -1,7 +1,7 @@
 import React from 'react';
-import {ButtonsAuth} from '../auth/ButtonsAuth';
 import {ImageSection} from '../auth/ImageSection';
 import {OtherAccount} from '../auth/OtherAccount';
+import {ButtonsLogin} from './ButtonsLogin';
 import {FormLogin} from './FormLogin';
 
 export const BodyLogin = ({form, onChange, navigation}) => {
@@ -9,12 +9,7 @@ export const BodyLogin = ({form, onChange, navigation}) => {
     <>
       <ImageSection section="Log in" />
       <FormLogin form={form} onChange={onChange} />
-      <ButtonsAuth
-        txtBtn="Log in"
-        txtBtnGoogle="Log in with Google"
-        form={form}
-        navigation={navigation}
-      />
+      <ButtonsLogin form={form} />
       <OtherAccount
         txtAccount="I don’t have an account?"
         txtGo="Sign up"
