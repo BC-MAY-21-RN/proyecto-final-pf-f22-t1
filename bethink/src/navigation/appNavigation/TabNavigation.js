@@ -1,5 +1,5 @@
 import React from 'react';
-import {StyleSheet, View} from 'react-native';
+import {StyleSheet} from 'react-native';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';

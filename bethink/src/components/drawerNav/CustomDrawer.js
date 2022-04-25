@@ -11,7 +11,7 @@ import {logout} from '../../actions/auth';
 export const CustomDrawer = props => {
   const dispatch = useDispatch();
   return (
-    <DrawerContentScrollView {...props}>
+    <DrawerContentScrollView {...props} style={styles.drawer}>
       <DrawerItemList {...props} />
       <DrawerItem
         style={styles.item}
@@ -29,5 +29,12 @@ const styles = StyleSheet.create({
   },
   item: {
     backgroundColor: '#6A82FB',
+  },
+  drawer: {
+    borderRightWidth: 2,
+    borderTopWidth: 1,
+    borderTopColor: '#FC5C7D',
+    borderRightColor: '#FC5C7D',
+    borderTopRightRadius: 20,
   },
 });

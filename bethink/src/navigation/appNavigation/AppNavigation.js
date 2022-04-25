@@ -34,22 +34,16 @@ export const AppNavigation = () => {
         drawerActiveBackgroundColor: '#FC5C7D',
         drawerActiveTintColor: 'white',
         drawerIcon: ({focused, size}) => iconsTab(route, focused, size),
-        drawerContentStyle: styles.drawer,
+        // drawerContentStyle: styles.drawer,
         drawerInactiveTintColor: 'white',
       })}
       drawerContent={props => <CustomDrawer {...props} />}>
       <Drawer.Screen name="Home" component={TabNavigation} />
-      <Drawer.Screen name="LoveNotes" component={LoveNotesScreen} />
+      <Drawer.Screen
+        name="LoveNotes"
+        component={LoveNotesScreen}
+        options={{title: 'Love notes'}}
+      />
     </Drawer.Navigator>
   );
 };
-
-const styles = StyleSheet.create({
-  drawer: {
-    borderRightWidth: 2,
-    borderTopWidth: 1,
-    borderTopColor: '#FC5C7D',
-    borderRightColor: '#FC5C7D',
-    borderTopRightRadius: 20,
-  },
-});
