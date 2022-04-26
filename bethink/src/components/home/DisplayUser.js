@@ -1,18 +1,27 @@
 import React from 'react';
 import {View, Text, StyleSheet} from 'react-native';
+import {DarkSwitch} from './DarkSwitch';
+// import {LightSwitch} from './LightSwitch';
 
 export const DisplayUser = () => {
   return (
-    <View>
-      <Text style={styles.txtuser}>Hello, Juan</Text>
+    <View style={styles.container}>
+      <Text style={styles.txtUser}>Hello, John</Text>
+      <DarkSwitch />
+      {/* <LightSwitch /> */}
     </View>
   );
 };
 
 const styles = StyleSheet.create({
-  txtuser: {
+  container: {
+    justifyContent: 'space-between',
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+  txtUser: {
     color: 'white',
     fontWeight: 'bold',
-    textAlign:'left',
+    fontSize: 18,
   },
 });
