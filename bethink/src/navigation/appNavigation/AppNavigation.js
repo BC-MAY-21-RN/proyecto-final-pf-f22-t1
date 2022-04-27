@@ -1,29 +1,13 @@
 import React from 'react';
-import {StyleSheet} from 'react-native';
-import Ionicons from 'react-native-vector-icons/Ionicons';
 
 import {createDrawerNavigator} from '@react-navigation/drawer';
 import {TabNavigation} from './TabNavigation';
 import {LoveNotesScreen} from '../../screens/notes/LoveNotesScreen';
 import {CustomDrawer} from '../../components/drawerNav/CustomDrawer';
+import {IconsDrawer} from '../../components/navigation/IconsDrawer';
 
 export const AppNavigation = () => {
   const Drawer = createDrawerNavigator();
-  const iconsTab = (route, focused, size) => {
-    let iconName;
-    if (route.name === 'Home') {
-      iconName = focused ? 'home' : 'home-outline';
-    } else if (route.name === 'LoveNotes') {
-      iconName = focused ? 'heart' : 'heart-outline';
-    }
-    return (
-      <Ionicons
-        name={iconName}
-        size={size}
-        color={focused ? 'white' : '#FC5C7D'}
-      />
-    );
-  };
   return (
     <Drawer.Navigator
       screenOptions={({route}) => ({
@@ -33,8 +17,9 @@ export const AppNavigation = () => {
         },
         drawerActiveBackgroundColor: '#FC5C7D',
         drawerActiveTintColor: 'white',
-        drawerIcon: ({focused, size}) => iconsTab(route, focused, size),
-        // drawerContentStyle: styles.drawer,
+        drawerIcon: ({focused, size}) => (
+          <IconsDrawer focused={focused} size={size} route={route} />
+        ),
         drawerInactiveTintColor: 'white',
       })}
       drawerContent={props => <CustomDrawer {...props} />}>

@@ -1,34 +1,20 @@
 import React from 'react';
 import {StyleSheet} from 'react-native';
-import Ionicons from 'react-native-vector-icons/Ionicons';
 
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import {HomeScreen} from '../../screens/home/HomeScreen';
 import {NotesScreen} from '../../screens/notes/NotesScreen';
 import {RemindersScreen} from '../../screens/reminders/RemindersScreen';
+import {IconsTab} from '../../components/navigation/IconsTab';
+
 export const TabNavigation = () => {
   const Tab = createBottomTabNavigator();
-  const iconsTab = (route, focused, size) => {
-    let iconName;
-    if (route.name === 'HomeAPP') {
-      iconName = focused ? 'home' : 'home-outline';
-    } else if (route.name === 'Notes') {
-      iconName = focused ? 'copy' : 'copy-outline';
-    } else if (route.name === 'Reminders') {
-      iconName = focused ? 'time' : 'time-outline';
-    }
-    return (
-      <Ionicons
-        name={iconName}
-        size={size}
-        color={focused ? 'white' : '#FC5C7D'}
-      />
-    );
-  };
   return (
     <Tab.Navigator
       screenOptions={({route}) => ({
-        tabBarIcon: ({focused, size}) => iconsTab(route, focused, size),
+        tabBarIcon: ({focused, size}) => (
+          <IconsTab focused={focused} size={size} route={route} />
+        ),
         tabBarActiveTintColor: '#FC5C7D',
         tabBarInactiveTintColor: 'gray',
         tabBarStyle: styles.tab,
