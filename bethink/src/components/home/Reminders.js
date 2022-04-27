@@ -37,7 +37,6 @@ export const Reminders = () => {
         keyExtractor={item => item.id}
         renderItem={cardReminders}
         horizontal
-        nestedScrollEnabled
       />
     </View>
   );

@@ -1,5 +1,5 @@
 import React from 'react';
-import {View, Text, StyleSheet, FlatList} from 'react-native';
+import {View, Text, StyleSheet} from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 const data = [
   {
@@ -24,7 +24,7 @@ const data = [
   },
 ];
 export const LoveNotes = () => {
-  const cardLoveNotes = ({item}) => (
+  const CardLoveNotes = ({item}) => (
     <View style={styles.containerCard}>
       <Text style={styles.titleCard}>{item.title}</Text>
       <Icon name="heart" size={50} color="#FC5C7D" />
@@ -34,11 +34,9 @@ export const LoveNotes = () => {
   return (
     <View style={styles.container}>
       <Text style={styles.txt}>I love it</Text>
-      <FlatList
-        data={data}
-        keyExtractor={item => item.id}
-        renderItem={cardLoveNotes}
-      />
+      {data.map(cardLove => (
+        <CardLoveNotes item={cardLove} key={cardLove.id} />
+      ))}
     </View>
   );
 };
@@ -46,7 +44,6 @@ export const LoveNotes = () => {
 const styles = StyleSheet.create({
   container: {
     marginVertical: 10,
-    height: 200,
   },
   txt: {
     color: 'white',
