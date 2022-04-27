@@ -2,64 +2,71 @@ import React from 'react';
 import {View, Text, StyleSheet, FlatList} from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
 
+const data = [
+  {
+    id: '1',
+    time: '9:00 a.m',
+    activity: 'Sciences exam',
+  },
+  {
+    id: '2',
+    time: '1:30 p.m',
+    activity: 'Go to the store',
+  },
+  {
+    id: '3',
+    time: '7:30 a.m',
+    activity: 'Dinner with Dania',
+  },
+];
 export const Reminders = () => {
-  const data = [
-    {
-      id: '1',
-      hora: '9:00 a.m',
-      actividad: 'Sciences exam',
-    },
-    {
-      id: '2',
-      hora: '1:30 p.m',
-      actividad: 'Go to the store',
-    },
-    {
-      id: '3',
-      hora: '7:30 a.m',
-      actividad: 'Dinner with Dania',
-    },
-  ];
-
-  const card = ({item}) => (
-    <LinearGradient colors={['#CC2B5E', '#0ABFBC']} style={styles.cardList}>
-      <View style={styles.card}>
-        <Text style={styles.textCard}>{item.hora}</Text>
-        <Text style={styles.textCard}>{item.actividad}</Text>
-      </View>
-      
+  const cardReminders = ({item}) => (
+    <LinearGradient
+      colors={['#CC2B5E', '#0ABFBC']}
+      style={styles.containerCard}>
+      <Text style={styles.txtTime}>{item.time}</Text>
+      <Text style={styles.txtAct}>{item.activity}</Text>
     </LinearGradient>
-  );  
+  );
+
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Reminders for today</Text>
-      <FlatList data={data} renderItem={card} keyExtractor={item => item.id} horizontal style={styles.list}/>
+      <Text style={styles.txt}>Reminders for today</Text>
+      <FlatList
+        data={data}
+        keyExtractor={item => item.id}
+        renderItem={cardReminders}
+        horizontal
+        nestedScrollEnabled
+      />
     </View>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
-    height: 150,
-    marginTop: 15
+    marginVertical: 10,
   },
-
-  card: {
-    alignItems: 'space-between'
-  },
-
-  title: {
-    fontSize: 20,
+  txt: {
     color: 'white',
     fontWeight: 'bold',
-    alignSelf: 'center'
+    fontSize: 18,
   },
-  cardList: {
-    flexDirection: 'row',
-    alignContent: 'space-between'
+  containerCard: {
+    height: 170,
+    width: 130,
+    margin: 10,
+    borderRadius: 10,
+    alignItems: 'center',
+    justifyContent: 'center',
   },
-
-  textCard: {
+  txtTime: {
     color: 'white',
-  }
+    fontSize: 32,
+  },
+  txtAct: {
+    color: 'black',
+    fontWeight: 'bold',
+    fontSize: 15,
+  },
 });

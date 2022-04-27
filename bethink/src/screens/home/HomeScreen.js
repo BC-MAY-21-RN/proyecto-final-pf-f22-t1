@@ -2,23 +2,23 @@ import React from 'react';
 import {View, Image, StyleSheet} from 'react-native';
 import {Date} from '../../components/home/Date';
 import {DisplayUser} from '../../components/home/DisplayUser';
-import { Reminders } from '../../components/home/Reminders';
+import {LoveNotes} from '../../components/home/LoveNotes';
+import {Reminders} from '../../components/home/Reminders';
 
 export const HomeScreen = () => {
   return (
     <View style={styles.containerMain}>
       <View style={styles.container}>
-      <View style={styles.containerCenter}>
-        <Image source={require('../../imgs/logo.png')} style={styles.logo} />
-      </View>
-      <DisplayUser />
-      <View style={styles.containerCenter}>
-        <Date />
+        <View style={styles.containerCenter}>
+          <Image source={require('../../imgs/logo.png')} style={styles.logo} />
+        </View>
+        <DisplayUser />
+        <View style={styles.containerCenter}>
+          <Date />
+        </View>
         <Reminders />
+        <LoveNotes />
       </View>
-
-      </View>
-
     </View>
   );
 };
@@ -27,7 +27,6 @@ const styles = StyleSheet.create({
   containerMain: {
     flex: 1,
     backgroundColor: '#231E41',
-    // marginHorizontal: 20,
   },
   containerCenter: {
     alignItems: 'center',
@@ -38,5 +37,5 @@ const styles = StyleSheet.create({
   },
   container: {
     marginHorizontal: 20,
-  }
+  },
 });
