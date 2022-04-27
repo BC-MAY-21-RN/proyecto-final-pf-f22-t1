@@ -2,6 +2,7 @@ import React from 'react';
 import {View, Image, StyleSheet} from 'react-native';
 import {Date} from '../../components/home/Date';
 import {DisplayUser} from '../../components/home/DisplayUser';
+import { Reminders } from '../../components/home/Reminders';
 
 export const HomeScreen = () => {
   return (
@@ -13,6 +14,7 @@ export const HomeScreen = () => {
       <DisplayUser />
       <View style={styles.containerCenter}>
         <Date />
+        <Reminders />
       </View>
 
       </View>
