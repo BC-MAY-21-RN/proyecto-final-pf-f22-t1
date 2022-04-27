@@ -4,9 +4,19 @@ import {AuthNavigation} from './authNavigation/AuthNavigation';
 import auth from '@react-native-firebase/auth';
 import {useDispatch, useSelector} from 'react-redux';
 import {login} from '../reducers/authSlice';
-import {HomeScreen} from '../screens/home/HomeScreen';
+import {AppNavigation} from './appNavigation/AppNavigation';
 
 const Stack = createNativeStackNavigator();
+
+const StackNavigation = uid => (
+  <Stack.Navigator screenOptions={{headerShown: false}}>
+    {uid ? (
+      <Stack.Screen name="App" component={AppNavigation} />
+    ) : (
+      <Stack.Screen name="Auth" component={AuthNavigation} />
+    )}
+  </Stack.Navigator>
+);
 
 export const Navigation = () => {
   const dispatch = useDispatch();
@@ -18,13 +28,5 @@ export const Navigation = () => {
       }
     });
   }, [dispatch]);
-  return (
-    <Stack.Navigator screenOptions={{headerShown: false}}>
-      {uid ? (
-        <Stack.Screen name="Home" component={HomeScreen} />
-      ) : (
-        <Stack.Screen name="Auth" component={AuthNavigation} />
-      )}
-    </Stack.Navigator>
-  );
+  return <StackNavigation uid={uid} />;
 };
