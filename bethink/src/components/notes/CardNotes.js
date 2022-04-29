@@ -60,20 +60,16 @@ const data = [
   },
 ];
 
+const colorsPriority = {
+  high: '#5DE3C3',
+  median: '#F1F29C',
+  low: '#E197F3',
+};
+
 export const CardNotes = () => {
   const statusCard = card => {
-    switch (card.priority) {
-      case 'high':
-        return '#5DE3C3';
-      case 'median':
-        return '#F1F29C';
-      case 'low':
-        return '#E197F3';
-      default:
-        return '';
-    }
+    return colorsPriority[card.priority];
   };
-
   const CardsNotes = ({card}) => (
     <View style={[styles.containerCard, {backgroundColor: statusCard(card)}]}>
       {card.love && (

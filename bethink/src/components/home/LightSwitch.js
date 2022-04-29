@@ -1,27 +1,11 @@
-import React, {useRef} from 'react';
+import React from 'react';
 import {TouchableOpacity, Animated} from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
-import {useDispatch} from 'react-redux';
-import {toggleModeUi} from '../../reducers/uiSlice';
+import {useAnimation} from '../../hooks/useAnimation';
 import {switchStyles} from './switchStyles';
 
 export const LightSwitch = () => {
-  const dispatch = useDispatch();
-  const opacity = useRef(new Animated.Value(1)).current;
-  const right = useRef(new Animated.Value(0)).current;
-
-  const animation = () => {
-    Animated.timing(opacity, {
-      toValue: 0,
-      duration: 500,
-      useNativeDriver: true,
-    }).start();
-    Animated.timing(right, {
-      toValue: -38,
-      duration: 500,
-      useNativeDriver: true,
-    }).start(() => dispatch(toggleModeUi('dark')));
-  };
+  const {opacity, move, animation} = useAnimation(-38, 'dark');
 
   const onDarkMode = () => {
     animation();
@@ -34,7 +18,7 @@ export const LightSwitch = () => {
           style={[
             switchStyles.btnDark,
             switchStyles.btnLight,
-            {transform: [{translateX: right}]},
+            {transform: [{translateX: move}]},
           ]}
         />
       </TouchableOpacity>

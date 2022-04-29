@@ -1,27 +1,11 @@
-import React, {useRef} from 'react';
+import React from 'react';
 import {TouchableOpacity, Animated} from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
-import {useDispatch} from 'react-redux';
-import {toggleModeUi} from '../../reducers/uiSlice';
+import {useAnimation} from '../../hooks/useAnimation';
 import {switchStyles} from './switchStyles';
 
 export const DarkSwitch = () => {
-  const dispatch = useDispatch();
-  const opacity = useRef(new Animated.Value(1)).current;
-  const left = useRef(new Animated.Value(0)).current;
-
-  const animation = () => {
-    Animated.timing(opacity, {
-      toValue: 0,
-      duration: 500,
-      useNativeDriver: true,
-    }).start();
-    Animated.timing(left, {
-      toValue: 38,
-      duration: 500,
-      useNativeDriver: true,
-    }).start(() => dispatch(toggleModeUi('light')));
-  };
+  const {opacity, move, animation} = useAnimation(38, 'light');
 
   const onLightMode = () => {
     animation();
@@ -31,7 +15,7 @@ export const DarkSwitch = () => {
     <Animated.View style={[switchStyles.containerSwitch, {opacity: opacity}]}>
       <TouchableOpacity onPress={onLightMode}>
         <Animated.View
-          style={[switchStyles.btnDark, {transform: [{translateX: left}]}]}
+          style={[switchStyles.btnDark, {transform: [{translateX: move}]}]}
         />
       </TouchableOpacity>
       <Icon name="moon" color="#E50CF8" size={18} />
