@@ -6,19 +6,21 @@ import {HomeScreen} from '../../screens/home/HomeScreen';
 import {NotesScreen} from '../../screens/notes/NotesScreen';
 import {RemindersScreen} from '../../screens/reminders/RemindersScreen';
 import {IconsTab} from '../../components/navigation/IconsTab';
+import {useSelector} from 'react-redux';
 
 export const TabNavigation = () => {
   const Tab = createBottomTabNavigator();
+  const {mode} = useSelector(store => store.ui);
   return (
     <Tab.Navigator
       screenOptions={({route}) => ({
         tabBarIcon: ({focused, size}) => (
           <IconsTab focused={focused} size={size} route={route} />
         ),
-        tabBarActiveTintColor: '#FC5C7D',
+        tabBarActiveTintColor: mode === 'dark' ? '#FC5C7D' : '#231E41',
         tabBarInactiveTintColor: 'gray',
-        tabBarStyle: styles.tab,
         headerShown: false,
+        tabBarStyle: [styles.tab, mode === 'light' && styles.tabLight],
       })}>
       <Tab.Screen
         name="HomeAPP"
@@ -34,9 +36,10 @@ export const TabNavigation = () => {
 const styles = StyleSheet.create({
   tab: {
     backgroundColor: '#231E41',
-    // borderTopLeftRadius: 15,
-    // borderTopRightRadius: 15,
     borderTopColor: '#FC5C7D',
     borderTopWidth: 2,
+  },
+  tabLight: {
+    backgroundColor: 'white',
   },
 });

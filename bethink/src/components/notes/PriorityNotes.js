@@ -1,5 +1,6 @@
 import React from 'react';
 import {View, Text, StyleSheet, Image} from 'react-native';
+import {SectionName} from '../home/SectionName';
 
 const emoji1 = require('../../imgs/notes/emoji1.png');
 const emoji2 = require('../../imgs/notes/emoji2.png');
@@ -15,7 +16,7 @@ export const PriorityNotes = () => {
 
   return (
     <View>
-      <Text style={styles.txt}>Priority</Text>
+      <SectionName text="Priority" />
       <View style={styles.contaniner}>
         <ItemPriority image={emoji1} colorIndicator="#E197F3" />
         <ItemPriority image={emoji2} colorIndicator="#5DE3C3" />

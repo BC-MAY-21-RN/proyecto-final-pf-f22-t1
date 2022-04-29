@@ -5,23 +5,25 @@ import {TabNavigation} from './TabNavigation';
 import {LoveNotesScreen} from '../../screens/notes/LoveNotesScreen';
 import {CustomDrawer} from '../../components/drawerNav/CustomDrawer';
 import {IconsDrawer} from '../../components/navigation/IconsDrawer';
+import {useSelector} from 'react-redux';
 
 const configDrawer = {
   headerShown: false,
-  drawerStyle: {
-    backgroundColor: '#231E41',
-  },
   drawerActiveBackgroundColor: '#FC5C7D',
   drawerActiveTintColor: 'white',
-  drawerInactiveTintColor: 'white',
 };
 
 export const AppNavigation = () => {
   const Drawer = createDrawerNavigator();
+  const {mode} = useSelector(state => state.ui);
   return (
     <Drawer.Navigator
       screenOptions={({route}) => ({
         ...configDrawer,
+        drawerInactiveTintColor: mode === 'dark' ? 'white' : '#FC5C7D',
+        drawerStyle: {
+          backgroundColor: mode === 'dark' ? '#231E41' : 'white',
+        },
         drawerIcon: ({focused, size}) => (
           <IconsDrawer focused={focused} size={size} route={route} />
         ),
