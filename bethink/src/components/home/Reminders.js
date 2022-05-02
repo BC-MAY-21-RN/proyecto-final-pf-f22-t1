@@ -1,6 +1,7 @@
 import React from 'react';
 import {View, Text, StyleSheet, FlatList} from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
+import {SectionName} from './SectionName';
 
 const data = [
   {
@@ -31,7 +32,7 @@ export const Reminders = () => {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.txt}>Reminders for today</Text>
+      <SectionName text="Reminders for today" />
       <FlatList
         data={data}
         keyExtractor={item => item.id}
@@ -45,11 +46,6 @@ export const Reminders = () => {
 const styles = StyleSheet.create({
   container: {
     marginVertical: 10,
-  },
-  txt: {
-    color: 'white',
-    fontWeight: 'bold',
-    fontSize: 18,
   },
   containerCard: {
     height: 170,

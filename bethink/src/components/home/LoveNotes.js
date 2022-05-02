@@ -1,6 +1,7 @@
 import React from 'react';
 import {View, Text, StyleSheet} from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
+import {SectionName} from './SectionName';
 const data = [
   {
     id: 1,
@@ -33,7 +34,7 @@ export const LoveNotes = () => {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.txt}>I love it</Text>
+      <SectionName text="I love it" />
       {data.map(cardLove => (
         <CardLoveNotes item={cardLove} key={cardLove.id} />
       ))}

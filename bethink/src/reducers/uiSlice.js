@@ -5,6 +5,7 @@ export const uiSlice = createSlice({
   initialState: {
     msgErrorLogin: false,
     msgErrorRegister: false,
+    mode: 'dark',
   },
   reducers: {
     setMsgErrorLogin: state => {
@@ -17,10 +18,17 @@ export const uiSlice = createSlice({
       state.msgErrorLogin = false;
       state.msgErrorRegister = false;
     },
+    toggleModeUi: (state, {payload}) => {
+      state.mode = payload;
+    },
   },
 });
 
-export const {setMsgErrorLogin, setMsgErrorRegister, removeMsgError} =
-  uiSlice.actions;
+export const {
+  setMsgErrorLogin,
+  setMsgErrorRegister,
+  removeMsgError,
+  toggleModeUi,
+} = uiSlice.actions;
 
 export default uiSlice.reducer;

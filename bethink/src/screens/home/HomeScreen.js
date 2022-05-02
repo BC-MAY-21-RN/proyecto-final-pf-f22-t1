@@ -1,5 +1,6 @@
 import React from 'react';
 import {View, Image, StyleSheet, ScrollView} from 'react-native';
+import {ContainerMain} from '../../components/home/ContainerMain';
 import {Date} from '../../components/home/Date';
 import {DisplayUser} from '../../components/home/DisplayUser';
 import {LoveNotes} from '../../components/home/LoveNotes';
@@ -7,7 +8,7 @@ import {Reminders} from '../../components/home/Reminders';
 
 export const HomeScreen = () => {
   return (
-    <View style={styles.containerMain}>
+    <ContainerMain>
       <ScrollView showsVerticalScrollIndicator={false}>
         <View style={styles.container}>
           <View style={styles.containerCenter}>
@@ -24,15 +25,11 @@ export const HomeScreen = () => {
           <LoveNotes />
         </View>
       </ScrollView>
-    </View>
+    </ContainerMain>
   );
 };
 
 const styles = StyleSheet.create({
-  containerMain: {
-    flex: 1,
-    backgroundColor: '#231E41',
-  },
   containerCenter: {
     alignItems: 'center',
   },

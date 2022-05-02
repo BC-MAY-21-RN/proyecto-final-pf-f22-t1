@@ -1,14 +1,16 @@
 import React from 'react';
-import {View, Text, StyleSheet} from 'react-native';
+import {View, StyleSheet} from 'react-native';
+import {useSelector} from 'react-redux';
 import {DarkSwitch} from './DarkSwitch';
-// import {LightSwitch} from './LightSwitch';
+import {LightSwitch} from './LightSwitch';
+import {SectionName} from './SectionName';
 
 export const DisplayUser = () => {
+  const {mode} = useSelector(state => state.ui);
   return (
     <View style={styles.container}>
-      <Text style={styles.txtUser}>Hello, John</Text>
-      <DarkSwitch />
-      {/* <LightSwitch /> */}
+      <SectionName text="Hello, John" />
+      {mode === 'dark' ? <DarkSwitch /> : <LightSwitch />}
     </View>
   );
 };
@@ -18,10 +20,5 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     flexDirection: 'row',
     alignItems: 'center',
-  },
-  txtUser: {
-    color: 'white',
-    fontWeight: 'bold',
-    fontSize: 18,
   },
 });
