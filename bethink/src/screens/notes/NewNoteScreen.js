@@ -1,87 +1,49 @@
 import React, {useState} from 'react';
-import {View, StyleSheet, Text, TextInput, Switch} from 'react-native';
+import {View, StyleSheet, Text} from 'react-native';
 import {ContainerMain} from '../../components/home/ContainerMain';
 
 import Icon from 'react-native-vector-icons/Ionicons';
+import {TitleNewNote} from '../../components/notes/TitleNewNote';
+import {SecurityNote} from '../../components/notes/SecurityNote';
+import {AddNote} from '../../components/notes/AddNote';
+import {PriorityNote} from '../../components/notes/PriorityNote';
 
-export const NewNoteScreen = () => {
-  const [text, setText] = useState('');
-  const [isEnabled, setIsEnabled] = useState(false);
-  const toggleSwitch = () => setIsEnabled(previousState => !previousState);
+export const NewNoteScreen = ({navigation}) => {
+  const [title, setTitle] = useState('');
+  const [priority, setPriority] = useState('low');
   return (
     <ContainerMain>
-      <View style={styles.mainContainer}>
-        <View style={styles.titleContainer}>
-          <Icon name="arrow-back-outline" color="#FC5C7D" size={45} />
+      <View style={styles.container}>
+        <View style={styles.containerSection}>
+          <Icon
+            name="arrow-back-outline"
+            color="#FC5C7D"
+            size={45}
+            onPress={() => navigation.goBack()}
+          />
           <Text style={styles.title}>New note</Text>
         </View>
-        <View style={styles.titleNotes}>
-          <TextInput
-            style={styles.inputTitle}
-            onChangeText={setText}
-            value={text}
-            placeholder={'Title'}
-            placeholderTextColor={'grey'}
-          />
-          <Icon name="heart" color="white" size={30} />
-        </View>
-        <View style={styles.dateAndSecurity}>
-          <Text style={styles.txtSecurity}>24 June, 2022</Text>
-          <View style={styles.security}>
-            <Text style={styles.txtSecurity}>Security</Text>
-            <Switch
-              trackColor={{false: '#767577', true: '#81b0ff'}}
-              thumbColor={isEnabled ? '#f5dd4b' : '#f4f3f4'}
-              ios_backgroundColor="#3e3e3e"
-              onValueChange={toggleSwitch}
-              value={isEnabled}
-            />
-          </View>
-        </View>
+        <TitleNewNote title={title} setTitle={setTitle} />
+        <SecurityNote />
+        <AddNote />
+        <PriorityNote priority={priority} setPriority={setPriority} />
       </View>
     </ContainerMain>
   );
 };
 
 const styles = StyleSheet.create({
-  mainContainer: {
+  container: {
     marginHorizontal: 20,
   },
-  titleContainer: {
+  containerSection: {
     flexDirection: 'row',
-    justifyContent: 'center',
-    marginTop: 50,
-    paddingRight: 50,
+    marginTop: 20,
   },
   title: {
     color: 'white',
     fontSize: 30,
+    fontWeight: 'bold',
     marginLeft: 50,
-    marginRight: 40,
-  },
-
-  inputTitle: {
-    color: 'white',
-    fontSize: 20,
-  },
-
-  titleNotes: {
-    flexDirection: 'row',
-    marginTop: 30,
-    alignItems: 'center',
-    justifyContent: 'space-between',
-    borderBottomColor: '#6A82FB',
-    borderBottomWidth: 4,
-  },
-  dateAndSecurity: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-  },
-
-  security: {
-    flexDirection: 'row',
-  },
-  txtSecurity: {
-    color: 'grey',
   },
 });

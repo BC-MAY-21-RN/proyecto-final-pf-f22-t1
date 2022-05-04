@@ -8,7 +8,7 @@ import {AppNavigation} from './appNavigation/AppNavigation';
 
 const Stack = createNativeStackNavigator();
 
-const StackNavigation = uid => (
+const StackNavigation = ({uid}) => (
   <Stack.Navigator screenOptions={{headerShown: false}}>
     {uid ? (
       <Stack.Screen name="App" component={AppNavigation} />
@@ -17,7 +17,6 @@ const StackNavigation = uid => (
     )}
   </Stack.Navigator>
 );
-
 export const Navigation = () => {
   const dispatch = useDispatch();
   const {uid} = useSelector(state => state.auth);
