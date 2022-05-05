@@ -7,6 +7,7 @@ export const BtnAddNote = ({formNote}) => {
     if (title.length === 0 || note.length === 0) {
       console.log('completa campos');
     } else {
+      /* connect with firebase */
       console.log(formNote);
     }
   };
