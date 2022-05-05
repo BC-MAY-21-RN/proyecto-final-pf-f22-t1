@@ -1,21 +1,22 @@
-import React, {useState} from 'react';
+import React from 'react';
 import {View, Text, Switch, StyleSheet} from 'react-native';
 
-export const SecurityNote = () => {
-  const [isEnabled, setIsEnabled] = useState(false);
-  const toggleSwitch = () => setIsEnabled(previousState => !previousState);
+export const SecurityNote = ({formNote, setFormNote}) => {
+  const {security, date} = formNote;
+  const toggleSwitch = () => {
+    setFormNote({...formNote, security: !security});
+  };
 
   return (
     <View style={styles.containerDateSecurity}>
-      <Text style={styles.txtDate}>24 June, 2022</Text>
+      <Text style={styles.txtDate}>{date}</Text>
       <View style={styles.containerSecurity}>
         <Text style={styles.txtSecurity}>Security</Text>
         <Switch
           trackColor={{false: '#767577', true: '#767577'}}
-          thumbColor={isEnabled ? '#74F572' : '#f4f3f4'}
-          ios_backgroundColor="#3e3e3e"
+          thumbColor={security ? '#74F572' : '#f4f3f4'}
           onValueChange={toggleSwitch}
-          value={isEnabled}
+          value={security}
         />
       </View>
     </View>

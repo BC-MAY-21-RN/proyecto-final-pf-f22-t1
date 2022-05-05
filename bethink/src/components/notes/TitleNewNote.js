@@ -1,37 +1,37 @@
 import React, {useState} from 'react';
 import {View, TextInput, StyleSheet} from 'react-native';
-import Icon from 'react-native-vector-icons/Ionicons';
+import {useSelector} from 'react-redux';
+
 import {useAnimationLike} from '../../hooks/useAnimationLike';
 import {HeartAnimation} from './HeartAnimation';
-export const TitleNewNote = ({title, setTtile}) => {
-  const [loveNote, setLoveNote] = useState(false);
+import {LoveNoteIcon} from './LoveNoteIcon';
+
+export const TitleNewNote = ({formNote, setFormNote}) => {
+  const {title, love} = formNote;
   const [showAnimation, setShowAnimation] = useState(false);
   const {opacity, move, animation} = useAnimationLike(setShowAnimation);
+  const {mode} = useSelector(store => store.ui);
 
   const loveIt = () => {
-    setLoveNote(true);
+    setFormNote({...formNote, love: true});
     setShowAnimation(true);
     animation();
   };
 
   const dontLoveIt = () => {
-    setLoveNote(false);
+    setFormNote({...formNote, love: false});
   };
 
   return (
     <View style={styles.containerTitleNote}>
       <TextInput
-        style={styles.inputTitle}
-        onChangeText={setTtile}
+        style={[styles.inputTitle, mode === 'light' && styles.inputTitleLight]}
+        onChangeText={value => setFormNote({...formNote, title: value})}
         value={title}
         placeholder={'Title'}
         placeholderTextColor={'grey'}
       />
-      {loveNote ? (
-        <Icon name="heart" color="#FC5C7D" size={40} onPress={dontLoveIt} />
-      ) : (
-        <Icon name="heart" color="white" size={35} onPress={loveIt} />
-      )}
+      <LoveNoteIcon love={love} loveIt={loveIt} dontLoveIt={dontLoveIt} />
       {showAnimation && <HeartAnimation move={move} opacity={opacity} />}
     </View>
   );
@@ -42,7 +42,9 @@ const styles = StyleSheet.create({
     color: 'white',
     fontSize: 20,
   },
-
+  inputTitleLight: {
+    color: 'black',
+  },
   containerTitleNote: {
     flexDirection: 'row',
     marginTop: 20,

@@ -1,32 +1,37 @@
 import React, {useState} from 'react';
-import {View, StyleSheet, Text} from 'react-native';
+import {View, StyleSheet} from 'react-native';
+import dayjs from 'dayjs';
 import {ContainerMain} from '../../components/home/ContainerMain';
 
-import Icon from 'react-native-vector-icons/Ionicons';
 import {TitleNewNote} from '../../components/notes/TitleNewNote';
 import {SecurityNote} from '../../components/notes/SecurityNote';
 import {AddNote} from '../../components/notes/AddNote';
 import {PriorityNote} from '../../components/notes/PriorityNote';
+import {AddNoteName} from '../../components/notes/AddNoteName';
+
+const dayCurrent = dayjs().format('DD/MMMM/YYYY');
+const dayFormat = dayCurrent.replace('/', ' ').replace('/', ', ');
+
+const initialForm = {
+  title: '',
+  love: '',
+  security: false,
+  date: dayFormat,
+  note: '',
+  priority: 'low',
+};
 
 export const NewNoteScreen = ({navigation}) => {
-  const [title, setTitle] = useState('');
-  const [priority, setPriority] = useState('low');
+  const [formNote, setFormNote] = useState(initialForm);
+  console.log(formNote);
   return (
     <ContainerMain>
       <View style={styles.container}>
-        <View style={styles.containerSection}>
-          <Icon
-            name="arrow-back-outline"
-            color="#FC5C7D"
-            size={45}
-            onPress={() => navigation.goBack()}
-          />
-          <Text style={styles.title}>New note</Text>
-        </View>
-        <TitleNewNote title={title} setTitle={setTitle} />
-        <SecurityNote />
-        <AddNote />
-        <PriorityNote priority={priority} setPriority={setPriority} />
+        <AddNoteName navigation={navigation} />
+        <TitleNewNote formNote={formNote} setFormNote={setFormNote} />
+        <SecurityNote formNote={formNote} setFormNote={setFormNote} />
+        <AddNote formNote={formNote} setFormNote={setFormNote} />
+        <PriorityNote formNote={formNote} setFormNote={setFormNote} />
       </View>
     </ContainerMain>
   );

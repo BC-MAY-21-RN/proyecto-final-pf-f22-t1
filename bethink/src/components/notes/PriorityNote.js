@@ -6,7 +6,8 @@ import LinearGradient from 'react-native-linear-gradient';
 
 const itemsPriority = ['Low', 'Median', 'High'];
 
-export const PriorityNote = ({priority, setPriority}) => {
+export const PriorityNote = ({formNote, setFormNote}) => {
+  const {priority} = formNote;
   return (
     <View style={styles.container}>
       <SectionName text="Priority" />
@@ -16,7 +17,8 @@ export const PriorityNote = ({priority, setPriority}) => {
             key={item}
             txt={item}
             priority={priority}
-            setPriority={setPriority}
+            formNote={formNote}
+            setFormNote={setFormNote}
           />
         ))}
       </View>
@@ -48,5 +50,6 @@ const styles = StyleSheet.create({
   txtBtn: {
     fontSize: 20,
     fontWeight: 'bold',
+    color: 'white',
   },
 });

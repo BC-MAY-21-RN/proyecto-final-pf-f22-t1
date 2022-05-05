@@ -1,8 +1,10 @@
 import React from 'react';
 import {View, StyleSheet, Text, TouchableOpacity} from 'react-native';
-export const CheckboxPriority = ({txt, priority, setPriority}) => {
+import {useSelector} from 'react-redux';
+export const CheckboxPriority = ({txt, priority, setFormNote, formNote}) => {
+  const {mode} = useSelector(state => state.ui);
   const onChange = () => {
-    setPriority(txt.toLowerCase());
+    setFormNote({...formNote, priority: txt.toLowerCase()});
   };
   return (
     <View style={styles.container}>
@@ -10,6 +12,7 @@ export const CheckboxPriority = ({txt, priority, setPriority}) => {
         <View
           style={[
             styles.itemCheckbox,
+            mode === 'light' && styles.itemCheckboxLight,
             priority === txt.toLowerCase() && styles.itemActive,
           ]}
         />
@@ -17,6 +20,7 @@ export const CheckboxPriority = ({txt, priority, setPriority}) => {
       <Text
         style={[
           styles.txtPriority,
+          mode === 'light' && styles.txtPriorityLight,
           priority === txt.toLowerCase() && styles.txtActive,
         ]}>
         {txt}
@@ -35,6 +39,9 @@ const styles = StyleSheet.create({
     width: 15,
     backgroundColor: 'white',
   },
+  itemCheckboxLight: {
+    backgroundColor: 'black',
+  },
   itemActive: {
     backgroundColor: '#6A82FB',
   },
@@ -45,5 +52,8 @@ const styles = StyleSheet.create({
   txtActive: {
     textDecorationLine: 'line-through',
     color: '#FC5C7D',
+  },
+  txtPriorityLight: {
+    color: 'black',
   },
 });
