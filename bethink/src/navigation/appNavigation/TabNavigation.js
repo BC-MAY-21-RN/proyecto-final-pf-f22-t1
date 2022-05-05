@@ -8,6 +8,20 @@ import {RemindersScreen} from '../../screens/reminders/RemindersScreen';
 import {IconsTab} from '../../components/navigation/IconsTab';
 import {useSelector} from 'react-redux';
 
+import {createNativeStackNavigator} from '@react-navigation/native-stack';
+import {NewNoteScreen} from '../../screens/notes/NewNoteScreen';
+
+const NotesNavigation = () => {
+  const Stack = createNativeStackNavigator();
+
+  return (
+    <Stack.Navigator screenOptions={{headerShown: false}}>
+      <Stack.Screen name="NotesMain" component={NotesScreen} />
+      <Stack.Screen name="NewNote" component={NewNoteScreen} />
+    </Stack.Navigator>
+  );
+};
+
 export const TabNavigation = () => {
   const Tab = createBottomTabNavigator();
   const {mode} = useSelector(store => store.ui);
@@ -27,7 +41,7 @@ export const TabNavigation = () => {
         component={HomeScreen}
         options={{title: 'Home'}}
       />
-      <Tab.Screen name="Notes" component={NotesScreen} />
+      <Tab.Screen name="Notes" component={NotesNavigation} />
       <Tab.Screen name="Reminders" component={RemindersScreen} />
     </Tab.Navigator>
   );

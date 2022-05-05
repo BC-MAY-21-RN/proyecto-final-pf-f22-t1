@@ -6,7 +6,7 @@ import {ButtonAddNotes} from '../../components/notes/ButtonAddNotes';
 import {CardNotes} from '../../components/notes/CardNotes';
 import {PriorityNotes} from '../../components/notes/PriorityNotes';
 
-export const NotesScreen = () => {
+export const NotesScreen = ({navigation}) => {
   const {mode} = useSelector(state => state.ui);
   return (
     <ContainerMain>
@@ -21,7 +21,7 @@ export const NotesScreen = () => {
           <CardNotes />
         </View>
       </ScrollView>
-      <ButtonAddNotes />
+      <ButtonAddNotes navigation={navigation} />
     </ContainerMain>
   );
 };
