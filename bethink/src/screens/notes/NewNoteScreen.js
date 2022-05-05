@@ -8,13 +8,14 @@ import {SecurityNote} from '../../components/notes/SecurityNote';
 import {AddNote} from '../../components/notes/AddNote';
 import {PriorityNote} from '../../components/notes/PriorityNote';
 import {AddNoteName} from '../../components/notes/AddNoteName';
+import {BtnAddNote} from '../../components/notes/BtnAddNote';
 
 const dayCurrent = dayjs().format('DD/MMMM/YYYY');
 const dayFormat = dayCurrent.replace('/', ' ').replace('/', ', ');
 
 const initialForm = {
   title: '',
-  love: '',
+  love: false,
   security: false,
   date: dayFormat,
   note: '',
@@ -32,6 +33,7 @@ export const NewNoteScreen = ({navigation}) => {
         <SecurityNote formNote={formNote} setFormNote={setFormNote} />
         <AddNote formNote={formNote} setFormNote={setFormNote} />
         <PriorityNote formNote={formNote} setFormNote={setFormNote} />
+        <BtnAddNote formNote={formNote} />
       </View>
     </ContainerMain>
   );
