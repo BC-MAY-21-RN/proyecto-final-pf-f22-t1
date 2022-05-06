@@ -5,7 +5,7 @@ export const getAllNotes = createAsyncThunk('notes', async uid => {
   try {
     const notes = await firestore()
       .collection('Notes')
-      .where('uid', '==', uid)
+      .where('user', '==', uid)
       .get();
     const allnotes = notes._docs.map(note => note._data);
     return allnotes;

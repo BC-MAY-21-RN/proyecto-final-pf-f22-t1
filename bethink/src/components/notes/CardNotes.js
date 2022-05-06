@@ -1,64 +1,6 @@
 import React from 'react';
 import {View, StyleSheet, Text, Image} from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
-const data = [
-  {
-    id: 1,
-    title: 'Medical appointment',
-    priority: 'high',
-    love: true,
-    createdAt: '24 june, 2022',
-  },
-  {
-    id: 2,
-    title: 'Math exam',
-    priority: 'median',
-    love: false,
-    createdAt: '24 june, 2022',
-  },
-  {
-    id: 3,
-    title: 'Burger recipe',
-    priority: 'low',
-    love: false,
-    createdAt: '24 june, 2022',
-  },
-  {
-    id: 4,
-    title: 'Burger recipe',
-    priority: 'high',
-    love: true,
-    createdAt: '24 june, 2022',
-  },
-  {
-    id: 5,
-    title: 'Burger recipe',
-    priority: 'low',
-    love: false,
-    createdAt: '24 june, 2022',
-  },
-  {
-    id: 6,
-    title: 'Burger recipe',
-    priority: 'low',
-    love: false,
-    createdAt: '24 june, 2022',
-  },
-  {
-    id: 7,
-    title: 'Burger recipe',
-    priority: 'high',
-    love: true,
-    createdAt: '24 june, 2022',
-  },
-  {
-    id: 8,
-    title: 'Burger recipe',
-    priority: 'low',
-    love: false,
-    createdAt: '24 june, 2022',
-  },
-];
 
 const colorsPriority = {
   high: '#5DE3C3',
@@ -66,7 +8,7 @@ const colorsPriority = {
   low: '#E197F3',
 };
 
-export const CardNotes = () => {
+export const CardNotes = ({notes}) => {
   const statusCard = card => {
     return colorsPriority[card.priority];
   };
@@ -82,10 +24,10 @@ export const CardNotes = () => {
         />
         <Text style={styles.title}>{card.title}</Text>
       </View>
-      <Text style={styles.createdAt}>{card.createdAt}</Text>
+      <Text style={styles.createdAt}>{card.date}</Text>
     </View>
   );
-  return data.map(card => <CardsNotes key={card.id} card={card} />);
+  return notes.map(card => <CardsNotes key={card.notes} card={card} />);
 };
 
 const styles = StyleSheet.create({

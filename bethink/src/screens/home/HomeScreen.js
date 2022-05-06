@@ -12,6 +12,7 @@ export const HomeScreen = () => {
   const {notes} = useSelector(state => state.notes);
   const {uid} = useSelector(state => state.auth);
   const dispatch = useDispatch();
+  console.log(notes);
 
   useEffect(() => {
     dispatch(getAllNotes(uid));

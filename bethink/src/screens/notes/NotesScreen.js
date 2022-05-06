@@ -20,7 +20,11 @@ export const NotesScreen = ({navigation}) => {
             </Text>
           </View>
           <PriorityNotes />
-          {notes.length > 0 ? <CardNotes /> : <NoNotes mode={mode} />}
+          {notes.length > 0 ? (
+            <CardNotes notes={notes} />
+          ) : (
+            <NoNotes mode={mode} />
+          )}
         </View>
       </ScrollView>
       <ButtonAddNotes navigation={navigation} />

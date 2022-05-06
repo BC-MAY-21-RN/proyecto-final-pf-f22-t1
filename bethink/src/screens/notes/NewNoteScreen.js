@@ -34,7 +34,11 @@ export const NewNoteScreen = ({navigation}) => {
         <SecurityNote formNote={formNote} setFormNote={setFormNote} />
         <AddNote formNote={formNote} setFormNote={setFormNote} />
         <PriorityNote formNote={formNote} setFormNote={setFormNote} />
-        <BtnAddNote formNote={formNote} setFormNote={setFormNote} />
+        <BtnAddNote
+          formNote={formNote}
+          setFormNote={setFormNote}
+          navigation={navigation}
+        />
         <ModalCompleteForm formNote={formNote} setFormNote={setFormNote} />
       </View>
     </ContainerMain>
