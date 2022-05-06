@@ -1,11 +1,17 @@
 import React from 'react';
-import {View, Text, StyleSheet} from 'react-native';
+import {Text, StyleSheet} from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
+import {getDateHome} from '../../helpers/getDate';
+
+const {day, month, year} = getDateHome();
+
 export const Date = () => {
   return (
     <LinearGradient colors={['#FC5C7D', '#6A82FB']} style={styles.container}>
-      <Text style={styles.txtday}>25</Text>
-      <Text style={styles.txtdate}>April, 2022</Text>
+      <Text style={styles.txtday}>{day}</Text>
+      <Text style={styles.txtdate}>
+        {month}, {year}
+      </Text>
     </LinearGradient>
   );
 };

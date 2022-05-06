@@ -4,10 +4,12 @@ import {useSelector} from 'react-redux';
 import {ContainerMain} from '../../components/home/ContainerMain';
 import {ButtonAddNotes} from '../../components/notes/ButtonAddNotes';
 import {CardNotes} from '../../components/notes/CardNotes';
+import {NoNotes} from '../../components/notes/NoNotes';
 import {PriorityNotes} from '../../components/notes/PriorityNotes';
 
 export const NotesScreen = ({navigation}) => {
   const {mode} = useSelector(state => state.ui);
+  const {notes} = useSelector(state => state.notes);
   return (
     <ContainerMain>
       <ScrollView showsVerticalScrollIndicator={false}>
@@ -18,7 +20,7 @@ export const NotesScreen = ({navigation}) => {
             </Text>
           </View>
           <PriorityNotes />
-          <CardNotes />
+          {notes.length > 0 ? <CardNotes /> : <NoNotes mode={mode} />}
         </View>
       </ScrollView>
       <ButtonAddNotes navigation={navigation} />

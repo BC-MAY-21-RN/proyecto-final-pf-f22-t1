@@ -1,11 +1,11 @@
 import React from 'react';
 import {StyleSheet, TouchableOpacity, Text} from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
-export const BtnAddNote = ({formNote}) => {
+export const BtnAddNote = ({formNote, setFormNote}) => {
   const {title, note} = formNote;
   const addNote = () => {
     if (title.length === 0 || note.length === 0) {
-      console.log('completa campos');
+      setFormNote({...formNote, errors: true});
     } else {
       /* connect with firebase */
       console.log(formNote);

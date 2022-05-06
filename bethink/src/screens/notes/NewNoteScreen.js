@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import {View, StyleSheet} from 'react-native';
-import dayjs from 'dayjs';
+
 import {ContainerMain} from '../../components/home/ContainerMain';
 
 import {TitleNewNote} from '../../components/notes/TitleNewNote';
@@ -9,22 +9,23 @@ import {AddNote} from '../../components/notes/AddNote';
 import {PriorityNote} from '../../components/notes/PriorityNote';
 import {AddNoteName} from '../../components/notes/AddNoteName';
 import {BtnAddNote} from '../../components/notes/BtnAddNote';
+import {getDayCurrent} from '../../helpers/getDate';
+import {ModalCompleteForm} from '../../components/notes/ModalCompleteForm';
 
-const dayCurrent = dayjs().format('DD/MMMM/YYYY');
-const dayFormat = dayCurrent.replace('/', ' ').replace('/', ', ');
+const dayCurrent = getDayCurrent();
 
 const initialForm = {
   title: '',
   love: false,
   security: false,
-  date: dayFormat,
+  date: dayCurrent,
   note: '',
   priority: 'low',
+  errors: false,
 };
 
 export const NewNoteScreen = ({navigation}) => {
   const [formNote, setFormNote] = useState(initialForm);
-  console.log(formNote);
   return (
     <ContainerMain>
       <View style={styles.container}>
@@ -33,7 +34,8 @@ export const NewNoteScreen = ({navigation}) => {
         <SecurityNote formNote={formNote} setFormNote={setFormNote} />
         <AddNote formNote={formNote} setFormNote={setFormNote} />
         <PriorityNote formNote={formNote} setFormNote={setFormNote} />
-        <BtnAddNote formNote={formNote} />
+        <BtnAddNote formNote={formNote} setFormNote={setFormNote} />
+        <ModalCompleteForm formNote={formNote} setFormNote={setFormNote} />
       </View>
     </ContainerMain>
   );
