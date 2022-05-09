@@ -39,8 +39,7 @@ const styles = StyleSheet.create({
     height: 40,
     borderRadius: 10,
     alignItems: 'center',
-    justifyContent: 'center',
-    marginTop: 10,
+    marginTop: 30
   },
   txtBtn: {
     fontSize: 20,

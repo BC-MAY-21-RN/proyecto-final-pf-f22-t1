@@ -27,12 +27,12 @@ export const PriorityNote = ({formNote, setFormNote}) => {
 
 const styles = StyleSheet.create({
   container: {
-    marginTop: 5,
+    marginTop: 15,
   },
   containerCheckbox: {
     flexDirection: 'row',
     justifyContent: 'space-around',
-    marginTop: 5,
+    marginTop: 15,
   },
   btn: {
     height: 40,

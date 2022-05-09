@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {View, StyleSheet} from 'react-native';
+import {View, StyleSheet, ScrollView} from 'react-native';
 
 import {ContainerMain} from '../../components/home/ContainerMain';
 
@@ -28,7 +28,7 @@ export const NewNoteScreen = ({navigation}) => {
   const [formNote, setFormNote] = useState(initialForm);
   return (
     <ContainerMain>
-      <View style={styles.container}>
+      <ScrollView style={styles.container}>
         <AddNoteName navigation={navigation} />
         <TitleNewNote formNote={formNote} setFormNote={setFormNote} />
         <SecurityNote formNote={formNote} setFormNote={setFormNote} />
@@ -40,7 +40,7 @@ export const NewNoteScreen = ({navigation}) => {
           navigation={navigation}
         />
         <ModalCompleteForm formNote={formNote} setFormNote={setFormNote} />
-      </View>
+      </ScrollView>
     </ContainerMain>
   );
 };

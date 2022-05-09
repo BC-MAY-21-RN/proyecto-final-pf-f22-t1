@@ -14,7 +14,7 @@ export const AddNote = ({formNote, setFormNote}) => {
           placeholderTextColor={'grey'}
           value={note}
           onChangeText={value => setFormNote({...formNote, note: value})}
-          style={mode === 'light' && styles.txtInputLight}
+          style={[styles.textInput, mode === 'light' && styles.txtInputLight]}
         />
       </View>
     </ScrollView>
@@ -25,8 +25,9 @@ const styles = StyleSheet.create({
   container: {
     backgroundColor: 'rgba(255,255,255,0.12)',
     borderRadius: 10,
-    height: 450,
+    height: 300,
     padding: 5,
+    marginTop: 10,
   },
   containerLight: {
     backgroundColor: 'rgba(154,154,154,0.12)',
@@ -34,5 +35,8 @@ const styles = StyleSheet.create({
   },
   txtInputLight: {
     color: 'black',
+  },
+  textInput:{
+    color:'white',
   },
 });
