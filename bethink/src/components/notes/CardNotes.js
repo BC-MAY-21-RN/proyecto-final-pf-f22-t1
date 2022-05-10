@@ -27,7 +27,7 @@ export const CardNotes = ({notes}) => {
       <Text style={styles.createdAt}>{card.date}</Text>
     </View>
   );
-  return notes.map(card => <CardsNotes key={card.notes} card={card} />);
+  return notes.map(card => <CardsNotes key={card.note} card={card} />);
 };
 
 const styles = StyleSheet.create({

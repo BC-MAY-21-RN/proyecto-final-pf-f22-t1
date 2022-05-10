@@ -5,10 +5,12 @@ export const notesSlice = createSlice({
   name: 'notes',
   initialState: {
     notes: [],
+    loadingNotes: true,
   },
   reducers: {},
   extraReducers: builder => {
     builder.addCase(getAllNotes.fulfilled, (state, {payload}) => {
+      state.loadingNotes = false;
       state.notes = payload;
     });
   },
