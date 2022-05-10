@@ -10,8 +10,8 @@ export const notesSlice = createSlice({
   reducers: {},
   extraReducers: builder => {
     builder.addCase(getAllNotes.fulfilled, (state, {payload}) => {
-      state.loadingNotes = false;
       state.notes = payload;
+      state.loadingNotes = false;
     });
   },
 });
