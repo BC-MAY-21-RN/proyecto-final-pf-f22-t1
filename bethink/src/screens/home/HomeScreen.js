@@ -1,10 +1,11 @@
 import React, {useEffect} from 'react';
-import {View, Image, StyleSheet, ScrollView, Text} from 'react-native';
+import {View, Image, StyleSheet, ScrollView} from 'react-native';
 import {useDispatch, useSelector} from 'react-redux';
 import {getAllNotes} from '../../actions/notes';
 import {ContainerMain} from '../../components/home/ContainerMain';
 import {Date} from '../../components/home/Date';
 import {DisplayUser} from '../../components/home/DisplayUser';
+import {LoadingNotes} from '../../components/home/LoadingNotes';
 import {LoveNotes} from '../../components/home/LoveNotes';
 import {NoLoves} from '../../components/home/NoLoves';
 import {Reminders} from '../../components/home/Reminders';
@@ -15,7 +16,6 @@ export const HomeScreen = () => {
   const dispatch = useDispatch();
 
   const notesLoveIt = notes.filter(note => note.love === true);
-  console.log(notesLoveIt);
 
   useEffect(() => {
     dispatch(getAllNotes(uid));
@@ -36,11 +36,13 @@ export const HomeScreen = () => {
             <Date />
           </View>
           <Reminders />
-          {loadingNotes ?
-            (<Text>Cargando</Text>)
-            : notesLoveIt.length > 0 ? <LoveNotes notes={notesLoveIt} /> : <NoLoves />
-          }
-          {/* {notesLoveIt.length > 0 ? <LoveNotes notes={notesLoveIt} /> : <NoLoves />} */}
+          {loadingNotes ? (
+            <LoadingNotes />
+          ) : notesLoveIt.length > 0 ? (
+            <LoveNotes notes={notesLoveIt} />
+          ) : (
+            <NoLoves />
+          )}
         </View>
       </ScrollView>
     </ContainerMain>
