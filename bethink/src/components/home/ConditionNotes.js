@@ -1,18 +1,21 @@
+import React from 'react';
+import { useSelector } from 'react-redux';
 import {LoadingNotes} from './LoadingNotes';
 import {LoveNotes} from './LoveNotes';
 import {NoLoves} from './NoLoves';
 
-export const ConditionNotes = ({notesLoveIt, loadingNotes}) => {
-
-    return(
-        <>
-        {loadingNotes ? (
-            <LoadingNotes />
-          ) : notesLoveIt.length > 0 ? (
-            <LoveNotes notes={notesLoveIt} />
-          ) : (
-            <NoLoves />
-          )}
-        </>
-    )
-}
+export const ConditionNotes = () => {
+  const {notes, loadingNotes} = useSelector(state => state.notes);
+  const notesLoveIt = notes.filter(note => note.love === true);
+  return (
+    <>
+      {loadingNotes ? (
+        <LoadingNotes />
+      ) : notesLoveIt.length > 0 ? (
+        <LoveNotes notes={notesLoveIt} />
+      ) : (
+        <NoLoves />
+      )}
+    </>
+  );
+};

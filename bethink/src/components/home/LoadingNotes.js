@@ -1,12 +1,12 @@
-import React, {useEffect, useRef} from 'react';
+import React, {useEffect} from 'react';
 import {StyleSheet, View, Animated} from 'react-native';
+import {useAnimationSkeleto} from '../../hooks/useAnimationSkeleto';
 import {SectionName} from './SectionName';
-import {useAnimationSkeleto} from '../hooks/useAnimationSkeleto'
 
 const data = [1, 2, 3, 4, 5];
 
 export const LoadingNotes = () => {
-  const {opacity, animation} = useAnimationSkeleto()
+  const {opacity, animation} = useAnimationSkeleto();
   useEffect(() => {
     animation();
   }, []);
