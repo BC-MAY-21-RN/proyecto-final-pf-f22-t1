@@ -1,22 +1,12 @@
 import React, {useEffect, useRef} from 'react';
 import {StyleSheet, View, Animated} from 'react-native';
 import {SectionName} from './SectionName';
+import {useAnimationSkeleto} from '../hooks/useAnimationSkeleto'
 
 const data = [1, 2, 3, 4, 5];
 
 export const LoadingNotes = () => {
-  const opacity = useRef(new Animated.Value(1)).current;
-
-  const animation = () => {
-    Animated.loop(
-      Animated.timing(opacity, {
-        toValue: 0,
-        useNativeDriver: true,
-        duration: 1500,
-      }),
-    ).start();
-  };
-
+  const {opacity, animation} = useAnimationSkeleto()
   useEffect(() => {
     animation();
   }, []);
