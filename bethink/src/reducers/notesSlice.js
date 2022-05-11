@@ -7,7 +7,11 @@ export const notesSlice = createSlice({
     notes: [],
     loadingNotes: true,
   },
-  reducers: {},
+  reducers: {
+    resetNotesState: state => {
+      (state.notes = []), (state.loadingNotes = true);
+    },
+  },
   extraReducers: builder => {
     builder.addCase(getAllNotes.fulfilled, (state, {payload}) => {
       state.notes = payload;
@@ -16,6 +20,6 @@ export const notesSlice = createSlice({
   },
 });
 
-export const {} = notesSlice.actions;
+export const {resetNotesState} = notesSlice.actions;
 
 export default notesSlice.reducer;

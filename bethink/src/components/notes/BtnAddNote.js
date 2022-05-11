@@ -39,7 +39,7 @@ const styles = StyleSheet.create({
     height: 40,
     borderRadius: 10,
     alignItems: 'center',
-    marginTop: 30
+    marginTop: 30,
   },
   txtBtn: {
     fontSize: 20,
