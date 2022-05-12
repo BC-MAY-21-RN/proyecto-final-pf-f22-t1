@@ -2,29 +2,8 @@ import React from 'react';
 import {View, Text, StyleSheet} from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 import {SectionName} from './SectionName';
-const data = [
-  {
-    id: 1,
-    title: 'Medical appointment',
-  },
-  {
-    id: 2,
-    title: 'Math exam',
-  },
-  {
-    id: 3,
-    title: 'Burger recipe',
-  },
-  {
-    id: 4,
-    title: 'Burger recipe',
-  },
-  {
-    id: 5,
-    title: 'Burger recipe',
-  },
-];
-export const LoveNotes = () => {
+
+export const LoveNotes = ({notes}) => {
   const CardLoveNotes = ({item}) => (
     <View style={styles.containerCard}>
       <Text style={styles.titleCard}>{item.title}</Text>
@@ -35,8 +14,8 @@ export const LoveNotes = () => {
   return (
     <View style={styles.container}>
       <SectionName text="I love it" />
-      {data.map(cardLove => (
-        <CardLoveNotes item={cardLove} key={cardLove.id} />
+      {notes.map(cardLove => (
+        <CardLoveNotes item={cardLove} key={cardLove.note} />
       ))}
     </View>
   );
