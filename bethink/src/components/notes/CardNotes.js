@@ -1,5 +1,5 @@
 import React from 'react';
-import {View, StyleSheet, Text, Image} from 'react-native';
+import {View, StyleSheet, Text, Image, TouchableOpacity} from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 
 const colorsPriority = {
@@ -8,26 +8,33 @@ const colorsPriority = {
   low: '#E197F3',
 };
 
-export const CardNotes = ({notes}) => {
+export const CardNotes = ({notes, navigation}) => {
   const statusCard = card => {
     return colorsPriority[card.priority];
   };
   const CardsNotes = ({card}) => (
     <View style={[styles.containerCard, {backgroundColor: statusCard(card)}]}>
-      {card.love && (
-        <Icon name="heart" color="#FC5C7D" size={30} style={styles.iconLove} />
-      )}
-      <View style={styles.containerTitle}>
-        <Image
-          source={require('../../imgs/notes/notes.png')}
-          style={styles.imgCard}
-        />
-        <Text style={styles.title}>{card.title}</Text>
-      </View>
-      <Text style={styles.createdAt}>{card.date}</Text>
+      <TouchableOpacity onPress={() => navigation.navigate('EditNote', {card})}>
+        {card.love && (
+          <Icon
+            name="heart"
+            color="#FC5C7D"
+            size={30}
+            style={styles.iconLove}
+          />
+        )}
+        <View style={styles.containerTitle}>
+          <Image
+            source={require('../../imgs/notes/notes.png')}
+            style={styles.imgCard}
+          />
+          <Text style={styles.title}>{card.title}</Text>
+        </View>
+        <Text style={styles.createdAt}>{card.date}</Text>
+      </TouchableOpacity>
     </View>
   );
-  return notes.map(card => <CardsNotes key={card.note} card={card} />);
+  return notes.map(card => <CardsNotes key={card.id} card={card} />);
 };
 
 const styles = StyleSheet.create({

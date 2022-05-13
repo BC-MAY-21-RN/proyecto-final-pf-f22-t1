@@ -1,40 +1,38 @@
 import React, {useState} from 'react';
-import {View, StyleSheet, ScrollView} from 'react-native';
-
+import {ScrollView, StyleSheet} from 'react-native';
 import {ContainerMain} from '../../components/home/ContainerMain';
-
-import {TitleNewNote} from '../../components/notes/TitleNewNote';
-import {SecurityNote} from '../../components/notes/SecurityNote';
 import {AddNote} from '../../components/notes/AddNote';
-import {PriorityNote} from '../../components/notes/PriorityNote';
 import {AddNoteName} from '../../components/notes/AddNoteName';
-import {BtnAddNote} from '../../components/notes/BtnAddNote';
-import {getDayCurrent} from '../../helpers/getDate';
+import {BtnEditNote} from '../../components/notes/BtnEditNote';
 import {ModalCompleteForm} from '../../components/notes/ModalCompleteForm';
+import {PriorityNote} from '../../components/notes/PriorityNote';
+import {SecurityNote} from '../../components/notes/SecurityNote';
+import {TitleNewNote} from '../../components/notes/TitleNewNote';
+import {getDayCurrent} from '../../helpers/getDate';
 
 const dayCurrent = getDayCurrent();
 
-const initialForm = {
-  title: '',
-  love: false,
-  security: false,
-  date: dayCurrent,
-  note: '',
-  priority: 'low',
-  errors: false,
-};
-
-export const NewNoteScreen = ({navigation}) => {
-  const [formNote, setFormNote] = useState(initialForm);
+export const EditNoteScreen = ({navigation, route}) => {
+  const {card} = route.params;
+  const [formNote, setFormNote] = useState({
+    id: card.id,
+    title: card.title,
+    love: card.love,
+    security: card.security,
+    date: dayCurrent,
+    note: card.note,
+    priority: card.priority,
+    errors: false,
+  });
   return (
     <ContainerMain>
       <ScrollView style={styles.container}>
-        <AddNoteName navigation={navigation} title="New note" />
+        <AddNoteName navigation={navigation} title="Edit note" />
         <TitleNewNote formNote={formNote} setFormNote={setFormNote} />
         <SecurityNote formNote={formNote} setFormNote={setFormNote} />
         <AddNote formNote={formNote} setFormNote={setFormNote} />
         <PriorityNote formNote={formNote} setFormNote={setFormNote} />
-        <BtnAddNote
+        <BtnEditNote
           formNote={formNote}
           setFormNote={setFormNote}
           navigation={navigation}

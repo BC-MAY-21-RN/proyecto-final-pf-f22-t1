@@ -15,7 +15,7 @@ export const LoveNotes = ({notes}) => {
     <View style={styles.container}>
       <SectionName text="I love it" />
       {notes.map(cardLove => (
-        <CardLoveNotes item={cardLove} key={cardLove.note} />
+        <CardLoveNotes item={cardLove} key={cardLove.id} />
       ))}
     </View>
   );

@@ -1,8 +1,7 @@
 import React from 'react';
-import {StyleSheet, TouchableOpacity, Text} from 'react-native';
-import LinearGradient from 'react-native-linear-gradient';
 import firestore from '@react-native-firebase/firestore';
 import {useSelector} from 'react-redux';
+import { BtnSave } from './BtnSave';
 
 export const BtnAddNote = ({formNote, setFormNote, navigation}) => {
   const {title, note} = formNote;
@@ -26,24 +25,7 @@ export const BtnAddNote = ({formNote, setFormNote, navigation}) => {
     }
   };
   return (
-    <TouchableOpacity onPress={addNote}>
-      <LinearGradient colors={['#CC2B5E', '#6A82FB']} style={styles.btn}>
-        <Text style={styles.txtBtn}>Save</Text>
-      </LinearGradient>
-    </TouchableOpacity>
+    <BtnSave action={addNote} />
   );
 };
 
-const styles = StyleSheet.create({
-  btn: {
-    height: 40,
-    borderRadius: 10,
-    alignItems: 'center',
-    marginTop: 30,
-  },
-  txtBtn: {
-    fontSize: 20,
-    fontWeight: 'bold',
-    color: 'white',
-  },
-});

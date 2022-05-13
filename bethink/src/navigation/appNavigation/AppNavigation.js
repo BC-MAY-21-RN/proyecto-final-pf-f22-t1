@@ -6,6 +6,7 @@ import {LoveNotesScreen} from '../../screens/notes/LoveNotesScreen';
 import {CustomDrawer} from '../../components/drawerNav/CustomDrawer';
 import {IconsDrawer} from '../../components/navigation/IconsDrawer';
 import {useSelector} from 'react-redux';
+import {SettingsScreen} from '../../screens/settings/SettingsScreen';
 
 const configDrawer = {
   headerShown: false,
@@ -35,6 +36,7 @@ export const AppNavigation = () => {
         component={LoveNotesScreen}
         options={{title: 'Love notes'}}
       />
+      <Drawer.Screen name="Settings" component={SettingsScreen} />
     </Drawer.Navigator>
   );
 };

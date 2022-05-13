@@ -6,6 +6,8 @@ export const IconsDrawer = ({route, focused, size}) => {
     iconName = focused ? 'home' : 'home-outline';
   } else if (route.name === 'LoveNotes') {
     iconName = focused ? 'heart' : 'heart-outline';
+  } else if (route.name === 'Settings') {
+    iconName = focused ? 'settings' : 'settings-outline';
   }
   return (
     <Ionicons
