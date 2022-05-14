@@ -1,24 +1,32 @@
 import React from 'react';
 import {Switch} from 'react-native';
-export const SwitchSettings = ({enable, setSwithSecurity, secure, swithSecurity}) => {
-  const {pin, biometric} = swithSecurity;
+import { useDispatch } from 'react-redux';
+import { removeSecurity } from '../../reducers/uiSlice';
+
+export const SwitchSettings = ({enable, setSwithSecurity, secure, permission}) => {
+  const dispatch = useDispatch()
   const enablePin = () => {
-    setSwithSecurity(previousState => {
-      console.log(previousState);
-    });
+    if (enable) {
+      setSwithSecurity({pin: false});
+      dispatch(removeSecurity())
+    } else {
+      setSwithSecurity({pin: true});
+    }
   };
   const enableBiometric = () => {
-    setSwithSecurity({
-      biometric: true,
-    });
+    if(!permission) return;
+    if (enable) {
+      setSwithSecurity({biometric: false});
+    } else {
+      setSwithSecurity({biometric: true});
+    }
   };
   return (
     <Switch
       trackColor={{false: '#767577', true: '#767577'}}
       thumbColor={enable ? '#74F572' : '#f4f3f4'}
-      onValueChange={secure === 'pin' ? enablePin : enableBiometric}
+      onValueChange={secure.includes('Pin') ? enablePin : enableBiometric}
       value={enable}
     />
   );
 };
-gi
