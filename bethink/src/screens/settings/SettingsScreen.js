@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {View, Text, StyleSheet} from 'react-native';
 import {useSelector} from 'react-redux';
 import {ContainerMain} from '../../components/home/ContainerMain';
@@ -12,8 +12,16 @@ const initialState = {
 };
 
 export const SettingsScreen = () => {
-  const {mode} = useSelector(state => state.ui);
+  const {mode, security} = useSelector(state => state.ui);
   const [swithSecurity, setSwithSecurity] = useState(initialState);
+
+  useEffect(() => {
+    if (security.mode === 'pin') {
+      setSwithSecurity({...swithSecurity, pin: true});
+    } else if (security.mode === 'biometric') {
+      setSwithSecurity({...swithSecurity, biometric: true});
+    }
+  }, []);
 
   return (
     <ContainerMain>
@@ -21,13 +29,18 @@ export const SettingsScreen = () => {
         <Text style={[styles.title, mode === 'light' && styles.titleLight]}>
           Settings
         </Text>
-        <SectionName text="Security" />
+        <SectionName text="Securitys" />
         <SecureSettings
           swithSecurity={swithSecurity}
           setSwithSecurity={setSwithSecurity}
         />
       </View>
-      <ModalPin swithSecurity={swithSecurity} setSwithSecurity={setSwithSecurity} />
+      {security.mode.length === 0 && (
+        <ModalPin
+          swithSecurity={swithSecurity}
+          setSwithSecurity={setSwithSecurity}
+        />
+      )}
     </ContainerMain>
   );
 };

@@ -1,13 +1,16 @@
 import React from 'react';
 import {TouchableOpacity, Text, View, StyleSheet} from 'react-native';
 import {useDispatch, useSelector} from 'react-redux';
-import { setSecurity } from '../../reducers/uiSlice';
+import {storageSecurity} from '../../helpers/storageSecurity';
+import {setSecurity} from '../../reducers/uiSlice';
+
 export const ModalBtn = ({password, setShowModal}) => {
   const {mode} = useSelector(state => state.ui);
   const dispatch = useDispatch();
   const securityPin = () => {
-    dispatch(setSecurity('pin'))
-    setShowModal(false)
+    dispatch(setSecurity({mode: 'pin', password}));
+    setShowModal(false);
+    storageSecurity({mode: 'pin', password});
   };
   return (
     <TouchableOpacity

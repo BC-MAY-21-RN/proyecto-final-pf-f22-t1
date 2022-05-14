@@ -9,6 +9,7 @@ export const uiSlice = createSlice({
     security: {
       secure: false,
       mode: '',
+      password: '',
     },
   },
   reducers: {
@@ -27,7 +28,8 @@ export const uiSlice = createSlice({
     },
     setSecurity: (state, {payload}) => {
       state.security.secure = true;
-      state.security.mode = payload;
+      state.security.mode = payload.mode;
+      state.security.password = payload.password;
     },
     removeSecurity: state => {
       state.security.secure = false;

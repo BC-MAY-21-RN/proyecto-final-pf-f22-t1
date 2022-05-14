@@ -9,7 +9,7 @@ export const ModalClose = ({setShowModal,setSwithSecurity}) => {
 
   const closeModal = () => {
     setShowModal(false);
-    if (security.secure.mode !== '') {
+    if (security.secure.password !== '') {
       setSwithSecurity({pin: false})
     }
   };
