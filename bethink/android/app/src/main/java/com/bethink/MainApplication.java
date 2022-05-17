@@ -1,4 +1,5 @@
 package com.bethink;
+import com.hieuvp.fingerprint.ReactNativeFingerprintScannerPackage; 
 
 import android.app.Application;
 import android.content.Context;

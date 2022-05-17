@@ -6,6 +6,11 @@ export const uiSlice = createSlice({
     msgErrorLogin: false,
     msgErrorRegister: false,
     mode: 'dark',
+    security: {
+      secure: false,
+      mode: '',
+      password: '',
+    },
   },
   reducers: {
     setMsgErrorLogin: state => {
@@ -21,6 +26,15 @@ export const uiSlice = createSlice({
     toggleModeUi: (state, {payload}) => {
       state.mode = payload;
     },
+    setSecurity: (state, {payload}) => {
+      state.security.secure = true;
+      state.security.mode = payload.mode;
+      state.security.password = payload.password;
+    },
+    removeSecurity: state => {
+      state.security.secure = false;
+      state.security.mode = '';
+    },
   },
 });
 
@@ -29,6 +43,8 @@ export const {
   setMsgErrorRegister,
   removeMsgError,
   toggleModeUi,
+  setSecurity,
+  removeSecurity,
 } = uiSlice.actions;
 
 export default uiSlice.reducer;

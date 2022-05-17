@@ -29,7 +29,7 @@ export const NewNoteScreen = ({navigation}) => {
   return (
     <ContainerMain>
       <ScrollView style={styles.container}>
-        <AddNoteName navigation={navigation} />
+        <AddNoteName navigation={navigation} title="New note" />
         <TitleNewNote formNote={formNote} setFormNote={setFormNote} />
         <SecurityNote formNote={formNote} setFormNote={setFormNote} />
         <AddNote formNote={formNote} setFormNote={setFormNote} />
@@ -48,15 +48,5 @@ export const NewNoteScreen = ({navigation}) => {
 const styles = StyleSheet.create({
   container: {
     marginHorizontal: 20,
-  },
-  containerSection: {
-    flexDirection: 'row',
-    marginTop: 20,
-  },
-  title: {
-    color: 'white',
-    fontSize: 30,
-    fontWeight: 'bold',
-    marginLeft: 50,
   },
 });

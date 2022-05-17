@@ -10,6 +10,7 @@ import {useSelector} from 'react-redux';
 
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import {NewNoteScreen} from '../../screens/notes/NewNoteScreen';
+import {EditNoteScreen} from '../../screens/notes/EditNoteScreen';
 
 const NotesNavigation = () => {
   const Stack = createNativeStackNavigator();
@@ -18,6 +19,7 @@ const NotesNavigation = () => {
     <Stack.Navigator screenOptions={{headerShown: false}}>
       <Stack.Screen name="NotesMain" component={NotesScreen} />
       <Stack.Screen name="NewNote" component={NewNoteScreen} />
+      <Stack.Screen name="EditNote" component={EditNoteScreen} />
     </Stack.Navigator>
   );
 };

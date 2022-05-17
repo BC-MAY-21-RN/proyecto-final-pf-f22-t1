@@ -2,7 +2,7 @@ import React from 'react';
 import {View, StyleSheet, Text} from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 import {useSelector} from 'react-redux';
-export const AddNoteName = ({navigation}) => {
+export const AddNoteName = ({navigation, title}) => {
   const {mode} = useSelector(state => state.ui);
   return (
     <View style={styles.containerSection}>
@@ -13,7 +13,7 @@ export const AddNoteName = ({navigation}) => {
         onPress={() => navigation.goBack()}
       />
       <Text style={[styles.title, mode === 'light' && styles.titleLight]}>
-        New note
+        {title}
       </Text>
     </View>
   );
