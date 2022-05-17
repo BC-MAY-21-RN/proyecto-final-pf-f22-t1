@@ -1,6 +1,7 @@
 import React from 'react';
 import {View, TouchableOpacity, Image, StyleSheet, Text} from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
+import { TitleNoteCard } from './TitleNoteCard';
 
 const colorsPriority = {
   high: '#5DE3C3',
@@ -23,13 +24,7 @@ export const CardListNote = ({card, onViewNote}) => {
             style={styles.iconLove}
           />
         )}
-        <View style={styles.containerTitle}>
-          <Image
-            source={require('../../imgs/notes/notes.png')}
-            style={styles.imgCard}
-          />
-          <Text style={styles.title}>{card.title}</Text>
-        </View>
+        <TitleNoteCard title={card.title} />
         <Text style={styles.createdAt}>{card.date}</Text>
       </TouchableOpacity>
     </View>
@@ -46,20 +41,6 @@ const styles = StyleSheet.create({
   },
   iconLove: {
     alignSelf: 'flex-end',
-  },
-  title: {
-    color: 'black',
-    fontWeight: 'bold',
-    fontSize: 20,
-    marginLeft: 15,
-  },
-  imgCard: {
-    height: 50,
-    width: 50,
-  },
-  containerTitle: {
-    flexDirection: 'row',
-    alignItems: 'center',
   },
   createdAt: {
     alignSelf: 'flex-end',

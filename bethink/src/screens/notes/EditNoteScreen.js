@@ -1,13 +1,7 @@
 import React, {useState} from 'react';
 import {ScrollView, StyleSheet} from 'react-native';
 import {ContainerMain} from '../../components/home/ContainerMain';
-import {AddNote} from '../../components/notes/AddNote';
-import {AddNoteName} from '../../components/notes/AddNoteName';
-import {BtnEditNote} from '../../components/notes/BtnEditNote';
-import {ModalCompleteForm} from '../../components/notes/ModalCompleteForm';
-import {PriorityNote} from '../../components/notes/PriorityNote';
-import {SecurityNote} from '../../components/notes/SecurityNote';
-import {TitleNewNote} from '../../components/notes/TitleNewNote';
+import {ContainerEditNote} from '../../components/notes/ContainerEditNote';
 import {getDayCurrent} from '../../helpers/getDate';
 
 const dayCurrent = getDayCurrent();
@@ -27,17 +21,8 @@ export const EditNoteScreen = ({navigation, route}) => {
   return (
     <ContainerMain>
       <ScrollView style={styles.container}>
-        <AddNoteName navigation={navigation} title="Edit note" />
-        <TitleNewNote formNote={formNote} setFormNote={setFormNote} />
-        <SecurityNote formNote={formNote} setFormNote={setFormNote} />
-        <AddNote formNote={formNote} setFormNote={setFormNote} />
-        <PriorityNote formNote={formNote} setFormNote={setFormNote} />
-        <BtnEditNote
-          formNote={formNote}
-          setFormNote={setFormNote}
-          navigation={navigation}
+        <ContainerEditNote navigation={navigation} formNote={formNote} setFormNote={setFormNote}
         />
-        <ModalCompleteForm formNote={formNote} setFormNote={setFormNote} />
       </ScrollView>
     </ContainerMain>
   );

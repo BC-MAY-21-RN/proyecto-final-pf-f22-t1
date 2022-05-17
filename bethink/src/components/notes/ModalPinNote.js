@@ -1,13 +1,11 @@
 import React, {useState} from 'react';
-import {View, Modal, Text, StyleSheet} from 'react-native';
-import {ModalMain} from '../pin/ModalMain';
-import {ActionPin} from '../pin/ActionPin';
-import {NumbersPin} from '../pin/NumbersPin';
+import {View, Modal,StyleSheet} from 'react-native';
+
+import {ModalPinContainer} from '../pin/ModalPinContainer';
 
 export const ModalPinNote = ({showModalPin, navigation, setShowModalPin}) => {
   const [pin, setPin] = useState('');
   const [showErrors, setShowErrors] = useState(false);
-
   const onChangePin = value => {
     setShowErrors(false);
     if (pin.length >= 4) return;
@@ -16,23 +14,12 @@ export const ModalPinNote = ({showModalPin, navigation, setShowModalPin}) => {
 
   return (
     <Modal animationType="slide" transparent={true} visible={showModalPin}>
-      <View style={styles.container}>
+      <View>
         <View style={[styles.containerModal]}>
-          <ModalMain
-            pin={pin}
-            setShowModalPin={setShowModalPin}
-            setPin={setPin}
-            setShowErrors={setShowErrors}
-          />
-          {showErrors && <Text style={styles.errors}>PIN incorrect</Text>}
-          <NumbersPin onChangePin={onChangePin} />
-          <ActionPin
-            pin={pin}
-            setPin={setPin}
+          <ModalPinContainer pin={pin} setShowModalPin={setShowModalPin} setPin={setPin} setShowErrors={setShowErrors}
             onChangePin={onChangePin}
-            setShowErrors={setShowErrors}
-            setShowModalPin={setShowModalPin}
             navigation={navigation}
+            showErrors={showErrors}
           />
         </View>
       </View>
@@ -47,16 +34,5 @@ const styles = StyleSheet.create({
     padding: 20,
     height: '100%',
     justifyContent: 'center',
-  },
-  errors: {
-    color: '#FC5C7D',
-    alignSelf: 'center',
-    marginBottom: 10,
-    fontWeight: 'bold',
-  },
-  containerNumbers: {
-    flexDirection: 'row',
-    justifyContent: 'space-around',
-    marginVertical: 10,
   },
 });
