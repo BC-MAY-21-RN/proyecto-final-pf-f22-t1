@@ -1,15 +1,17 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {View, Text, StyleSheet, ScrollView} from 'react-native';
 import {useSelector} from 'react-redux';
 import {ContainerMain} from '../../components/home/ContainerMain';
 import {ButtonAddNotes} from '../../components/notes/ButtonAddNotes';
 import {CardNotes} from '../../components/notes/CardNotes';
+import {ModalPinNote} from '../../components/notes/ModalPinNote';
 import {NoNotes} from '../../components/notes/NoNotes';
 import {PriorityNotes} from '../../components/notes/PriorityNotes';
 
 export const NotesScreen = ({navigation}) => {
   const {mode} = useSelector(state => state.ui);
   const {notes} = useSelector(state => state.notes);
+  const [showModalPin, setShowModalPin] = useState(false);
   return (
     <ContainerMain>
       <ScrollView showsVerticalScrollIndicator={false}>
@@ -21,12 +23,22 @@ export const NotesScreen = ({navigation}) => {
           </View>
           <PriorityNotes />
           {notes.length > 0 ? (
-            <CardNotes notes={notes} navigation={navigation} />
+            <CardNotes
+              notes={notes}
+              navigation={navigation}
+              showModalPin={showModalPin}
+              setShowModalPin={setShowModalPin}
+            />
           ) : (
             <NoNotes mode={mode} />
           )}
         </View>
       </ScrollView>
+      <ModalPinNote
+        showModalPin={showModalPin}
+        navigation={navigation}
+        setShowModalPin={setShowModalPin}
+      />
       <ButtonAddNotes navigation={navigation} />
     </ContainerMain>
   );

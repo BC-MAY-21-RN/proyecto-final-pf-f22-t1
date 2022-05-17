@@ -6,10 +6,17 @@ export const notesSlice = createSlice({
   initialState: {
     notes: [],
     loadingNotes: true,
+    noteSecurity: [],
   },
   reducers: {
     resetNotesState: state => {
       (state.notes = []), (state.loadingNotes = true);
+    },
+    noteToPin: (state, {payload}) => {
+      state.noteSecurity = payload;
+    },
+    removeNoteToPin: state => {
+      state.noteSecurity = [];
     },
   },
   extraReducers: builder => {
@@ -20,6 +27,6 @@ export const notesSlice = createSlice({
   },
 });
 
-export const {resetNotesState} = notesSlice.actions;
+export const {resetNotesState, noteToPin, removeNoteToPin} = notesSlice.actions;
 
 export default notesSlice.reducer;

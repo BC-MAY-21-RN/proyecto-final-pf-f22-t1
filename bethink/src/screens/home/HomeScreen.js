@@ -31,7 +31,7 @@ export const HomeScreen = () => {
     }, []),
   );
 
-  console.log(security);
+  // console.log(security);
   return (
     <ContainerMain>
       <ScrollView showsVerticalScrollIndicator={false}>

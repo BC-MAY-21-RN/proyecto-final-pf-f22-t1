@@ -1,6 +1,8 @@
 import React from 'react';
 import {View, StyleSheet, Text, Image, TouchableOpacity} from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
+import {useDispatch, useSelector} from 'react-redux';
+import {noteToPin} from '../../reducers/notesSlice';
 
 const colorsPriority = {
   high: '#5DE3C3',
@@ -8,13 +10,32 @@ const colorsPriority = {
   low: '#E197F3',
 };
 
-export const CardNotes = ({notes, navigation}) => {
+export const CardNotes = ({
+  notes,
+  navigation,
+  // showModalPin,
+  setShowModalPin,
+}) => {
+  const {security} = useSelector(state => state.ui);
+  const dispatch = useDispatch();
   const statusCard = card => {
     return colorsPriority[card.priority];
   };
+
+  const onViewNote = card => {
+    // console.log(card);
+    if (security.mode === 'pin' && card.security === true) {
+      setShowModalPin(true);
+      dispatch(noteToPin(card));
+    } else {
+      navigation.navigate('EditNote', {card});
+    }
+  };
+
   const CardsNotes = ({card}) => (
     <View style={[styles.containerCard, {backgroundColor: statusCard(card)}]}>
-      <TouchableOpacity onPress={() => navigation.navigate('EditNote', {card})}>
+      {/* <TouchableOpacity onPress={() => navigation.navigate('EditNote', {card})}> */}
+      <TouchableOpacity onPress={() => onViewNote(card)}>
         {card.love && (
           <Icon
             name="heart"
