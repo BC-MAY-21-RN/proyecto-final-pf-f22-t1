@@ -28,7 +28,7 @@ export const SwitchSettings = ({
   const enableBiometric = () => {
     if (!permission) return;
     if (enable) {
-      setSwithSecurity({biometric: false});
+      setSwithSecurity({biometric: false, pin: false});
       dispatch(removeSecurity());
       storageSecurity({mode: '', password: ''});
     } else {

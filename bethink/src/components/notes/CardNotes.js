@@ -1,91 +1,40 @@
 import React from 'react';
 import {View, StyleSheet, Text, Image, TouchableOpacity} from 'react-native';
-import Icon from 'react-native-vector-icons/Ionicons';
+// import Icon from 'react-native-vector-icons/Ionicons';
 import {useDispatch, useSelector} from 'react-redux';
 import {noteToPin} from '../../reducers/notesSlice';
+import FingerprintScanner from 'react-native-fingerprint-scanner';
+import {CardListNote} from './CardListNote';
 
-const colorsPriority = {
-  high: '#5DE3C3',
-  median: '#F1F29C',
-  low: '#E197F3',
+const msgFingerPrint = {
+  description: 'Scan your fingerprint to access to the note',
+  cancelButton: 'Cancel',
 };
 
-export const CardNotes = ({
-  notes,
-  navigation,
-  // showModalPin,
-  setShowModalPin,
-}) => {
+export const CardNotes = ({notes, navigation, setShowModalPin}) => {
   const {security} = useSelector(state => state.ui);
   const dispatch = useDispatch();
-  const statusCard = card => {
-    return colorsPriority[card.priority];
-  };
-
   const onViewNote = card => {
-    // console.log(card);
     if (security.mode === 'pin' && card.security === true) {
       setShowModalPin(true);
       dispatch(noteToPin(card));
+    } else if (security.mode === 'biometric' && card.security === true) {
+      onFingerPrint(card);
     } else {
       navigation.navigate('EditNote', {card});
     }
   };
+  const onFingerPrint = async card => {
+    try {
+      await FingerprintScanner.authenticate(msgFingerPrint);
+      FingerprintScanner.release();
+      navigation.navigate('EditNote', {card});
+    } catch (error) {
+      FingerprintScanner.release();
+    }
+  };
 
-  const CardsNotes = ({card}) => (
-    <View style={[styles.containerCard, {backgroundColor: statusCard(card)}]}>
-      {/* <TouchableOpacity onPress={() => navigation.navigate('EditNote', {card})}> */}
-      <TouchableOpacity onPress={() => onViewNote(card)}>
-        {card.love && (
-          <Icon
-            name="heart"
-            color="#FC5C7D"
-            size={30}
-            style={styles.iconLove}
-          />
-        )}
-        <View style={styles.containerTitle}>
-          <Image
-            source={require('../../imgs/notes/notes.png')}
-            style={styles.imgCard}
-          />
-          <Text style={styles.title}>{card.title}</Text>
-        </View>
-        <Text style={styles.createdAt}>{card.date}</Text>
-      </TouchableOpacity>
-    </View>
-  );
-  return notes.map(card => <CardsNotes key={card.id} card={card} />);
+  return notes.map(card => (
+    <CardListNote key={card.id} card={card} onViewNote={onViewNote} />
+  ));
 };
-
-const styles = StyleSheet.create({
-  containerCard: {
-    height: 115,
-    marginVertical: 10,
-    borderRadius: 20,
-    padding: 10,
-    justifyContent: 'space-around',
-  },
-  iconLove: {
-    alignSelf: 'flex-end',
-  },
-  title: {
-    color: 'black',
-    fontWeight: 'bold',
-    fontSize: 20,
-    marginLeft: 15,
-  },
-  imgCard: {
-    height: 50,
-    width: 50,
-  },
-  containerTitle: {
-    flexDirection: 'row',
-    alignItems: 'center',
-  },
-  createdAt: {
-    alignSelf: 'flex-end',
-    color: 'black',
-    opacity: 0.6,
-  },
-});
