@@ -2,11 +2,8 @@ import React from 'react';
 import {Image, StyleSheet} from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 import {useDispatch, useSelector} from 'react-redux';
-import {removeSecurity} from '../../reducers/uiSlice';
 export const ModalClose = ({setShowModal,setSwithSecurity}) => {
   const {security} = useSelector(state => state.ui);
-  const dispatch = useDispatch();
-
   const closeModal = () => {
     setShowModal(false);
     if (security.secure.password !== '') {

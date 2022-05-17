@@ -1,11 +1,13 @@
 import React, {useState} from 'react';
 import {View, Modal,StyleSheet} from 'react-native';
+import { useSelector } from 'react-redux';
 
 import {ModalPinContainer} from '../pin/ModalPinContainer';
 
-export const ModalPinNote = ({showModalPin, navigation, setShowModalPin}) => {
+export const ModalPinNote = ({navigation}) => {
   const [pin, setPin] = useState('');
   const [showErrors, setShowErrors] = useState(false);
+  const {showModalPin} = useSelector(state => state.ui)
   const onChangePin = value => {
     setShowErrors(false);
     if (pin.length >= 4) return;
@@ -16,7 +18,7 @@ export const ModalPinNote = ({showModalPin, navigation, setShowModalPin}) => {
     <Modal animationType="slide" transparent={true} visible={showModalPin}>
       <View>
         <View style={[styles.containerModal]}>
-          <ModalPinContainer pin={pin} setShowModalPin={setShowModalPin} setPin={setPin} setShowErrors={setShowErrors}
+          <ModalPinContainer pin={pin} setPin={setPin} setShowErrors={setShowErrors}
             onChangePin={onChangePin}
             navigation={navigation}
             showErrors={showErrors}

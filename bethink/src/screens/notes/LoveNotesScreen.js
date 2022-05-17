@@ -3,8 +3,9 @@ import {ScrollView, StyleSheet, View, Image, Text} from 'react-native';
 import {useSelector} from 'react-redux';
 import {ContainerMain} from '../../components/home/ContainerMain';
 import {LoveNotes} from '../../components/home/LoveNotes';
+import {ModalPinNote} from '../../components/notes/ModalPinNote';
 
-export const LoveNotesScreen = () => {
+export const LoveNotesScreen = ({navigation}) => {
   const {notes} = useSelector(state => state.notes);
   const notesLove = notes.filter(note => note.love === true);
   return (
@@ -12,7 +13,7 @@ export const LoveNotesScreen = () => {
       <ScrollView showsVerticalScrollIndicator={false}>
         <View style={styles.container}>
           {notesLove.length !== 0 ? (
-            <LoveNotes notes={notesLove} />
+            <LoveNotes notes={notesLove} navigation={navigation} />
           ) : (
             <View style={styles.containerNoNotes}>
               <Image
@@ -26,6 +27,7 @@ export const LoveNotesScreen = () => {
           )}
         </View>
       </ScrollView>
+      <ModalPinNote navigation={navigation} />
     </ContainerMain>
   );
 };

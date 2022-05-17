@@ -4,15 +4,10 @@ import {ActionPin} from './ActionPin';
 import {ModalMain} from './ModalMain';
 import {NumbersPin} from './NumbersPin';
 
-export const ModalPinContainer = ({pin, setShowModalPin, setPin, setShowErrors, onChangePin, navigation, showErrors}) => {
+export const ModalPinContainer = ({pin,setPin,setShowErrors,onChangePin,navigation,showErrors}) => {
   return (
     <>
-      <ModalMain
-        pin={pin}
-        setShowModalPin={setShowModalPin}
-        setPin={setPin}
-        setShowErrors={setShowErrors}
-      />
+      <ModalMain pin={pin} setPin={setPin} setShowErrors={setShowErrors} />
       {showErrors && <Text style={styles.errors}>PIN incorrect</Text>}
       <NumbersPin onChangePin={onChangePin} />
       <ActionPin
@@ -20,7 +15,6 @@ export const ModalPinContainer = ({pin, setShowModalPin, setPin, setShowErrors, 
         setPin={setPin}
         onChangePin={onChangePin}
         setShowErrors={setShowErrors}
-        setShowModalPin={setShowModalPin}
         navigation={navigation}
       />
     </>

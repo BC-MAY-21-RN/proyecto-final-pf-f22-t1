@@ -4,7 +4,7 @@ import {LoadingNotes} from './LoadingNotes';
 import {LoveNotes} from './LoveNotes';
 import {NoLoves} from './NoLoves';
 
-export const ConditionNotes = () => {
+export const ConditionNotes = ({navigation}) => {
   const {notes, loadingNotes} = useSelector(state => state.notes);
   const notesLoveIt = notes.filter(note => note.love === true);
   return (
@@ -12,7 +12,7 @@ export const ConditionNotes = () => {
       {loadingNotes ? (
         <LoadingNotes />
       ) : notesLoveIt.length > 0 ? (
-        <LoveNotes notes={notesLoveIt} />
+        <LoveNotes notes={notesLoveIt} navigation={navigation} />
       ) : (
         <NoLoves />
       )}

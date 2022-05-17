@@ -5,18 +5,19 @@ import {useDispatch, useSelector} from 'react-redux';
 import {noteToPin} from '../../reducers/notesSlice';
 import FingerprintScanner from 'react-native-fingerprint-scanner';
 import {CardListNote} from './CardListNote';
+import { setModalPin } from '../../reducers/uiSlice';
 
 const msgFingerPrint = {
   description: 'Scan your fingerprint to access to the note',
   cancelButton: 'Cancel',
 };
 
-export const CardNotes = ({notes, navigation, setShowModalPin}) => {
+export const CardNotes = ({notes, navigation}) => {
   const {security} = useSelector(state => state.ui);
   const dispatch = useDispatch();
   const onViewNote = card => {
     if (security.mode === 'pin' && card.security === true) {
-      setShowModalPin(true);
+      dispatch(setModalPin(true))
       dispatch(noteToPin(card));
     } else if (security.mode === 'biometric' && card.security === true) {
       onFingerPrint(card);

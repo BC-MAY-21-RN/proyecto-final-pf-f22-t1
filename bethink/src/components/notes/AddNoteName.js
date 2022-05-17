@@ -10,7 +10,7 @@ export const AddNoteName = ({navigation, title}) => {
         name="arrow-back-outline"
         color="#FC5C7D"
         size={45}
-        onPress={() => navigation.goBack()}
+        onPress={() => navigation.navigate('NotesMain')}
       />
       <Text style={[styles.title, mode === 'light' && styles.titleLight]}>
         {title}
