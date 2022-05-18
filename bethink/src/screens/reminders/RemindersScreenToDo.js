@@ -3,16 +3,20 @@ import {useSelector} from 'react-redux';
 import {StyleSheet, Text, ScrollView} from 'react-native';
 import {ContainerMain} from '../../components/home/ContainerMain';
 import {CardsReminders} from '../../components/reminders/CardsReminders';
-export const RemindersScreen = () => {
+import {ButtonAddReminders} from '../../components/reminders/ButtonAddReminders';
+import {NavigationReminders} from '../../components/reminders/NavigationReminders';
+export const RemindersScreenToDo = () => {
   const {mode} = useSelector(state => state.ui);
   return (
     <ContainerMain>
+      <Text style={[styles.title, mode === 'light' && styles.titleLight]}>
+        Reminders
+      </Text>
+      <NavigationReminders />
       <ScrollView>
-        <Text style={[styles.title, mode === 'light' && styles.titleLight]}>
-          Reminders
-        </Text>
         <CardsReminders />
       </ScrollView>
+      <ButtonAddReminders />
     </ContainerMain>
   );
 };
@@ -21,5 +25,7 @@ const styles = StyleSheet.create({
     color: 'white',
     fontWeight: 'bold',
     fontSize: 25,
+    alignSelf: 'center',
+    marginTop: 20,
   },
 });
