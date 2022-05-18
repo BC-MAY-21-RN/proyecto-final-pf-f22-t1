@@ -22,6 +22,8 @@ const NotesNavigation = () => {
   );
 };
 
+/* here top tabs */
+
 export const TabNavigation = () => {
   const Tab = createBottomTabNavigator();
   const {mode} = useSelector(store => store.ui);
