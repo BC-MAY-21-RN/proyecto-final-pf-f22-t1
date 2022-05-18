@@ -1,41 +1,17 @@
 import React from 'react';
-import {View, StyleSheet, Text, Image, TouchableOpacity} from 'react-native';
-// import Icon from 'react-native-vector-icons/Ionicons';
 import {useDispatch, useSelector} from 'react-redux';
-import {noteToPin} from '../../reducers/notesSlice';
-import FingerprintScanner from 'react-native-fingerprint-scanner';
 import {CardListNote} from './CardListNote';
-import { setModalPin } from '../../reducers/uiSlice';
-
-const msgFingerPrint = {
-  description: 'Scan your fingerprint to access to the note',
-  cancelButton: 'Cancel',
-};
+import {onViewNote} from '../../helpers/fingerPrint';
 
 export const CardNotes = ({notes, navigation}) => {
   const {security} = useSelector(state => state.ui);
   const dispatch = useDispatch();
-  const onViewNote = card => {
-    if (security.mode === 'pin' && card.security === true) {
-      dispatch(setModalPin(true))
-      dispatch(noteToPin(card));
-    } else if (security.mode === 'biometric' && card.security === true) {
-      onFingerPrint(card);
-    } else {
-      navigation.navigate('EditNote', {card});
-    }
-  };
-  const onFingerPrint = async card => {
-    try {
-      await FingerprintScanner.authenticate(msgFingerPrint);
-      FingerprintScanner.release();
-      navigation.navigate('EditNote', {card});
-    } catch (error) {
-      FingerprintScanner.release();
-    }
+
+  const onView = card => {
+    onViewNote(card, security, dispatch, navigation);
   };
 
   return notes.map(card => (
-    <CardListNote key={card.id} card={card} onViewNote={onViewNote} />
+    <CardListNote key={card.id} card={card} onViewNote={onView} />
   ));
 };

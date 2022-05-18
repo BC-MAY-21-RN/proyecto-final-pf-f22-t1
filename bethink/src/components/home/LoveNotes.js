@@ -1,48 +1,24 @@
 import React from 'react';
 import {View, Text, StyleSheet, TouchableOpacity} from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
-import { useDispatch, useSelector } from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
 import {SectionName} from './SectionName';
-import FingerprintScanner from 'react-native-fingerprint-scanner';
-import { noteToPin } from '../../reducers/notesSlice';
-import { setModalPin } from '../../reducers/uiSlice';
-const msgFingerPrint = {
-  description: 'Scan your fingerprint to access to the note',
-  cancelButton: 'Cancel',
-};
+import {onViewNote} from '../../helpers/fingerPrint';
 
 export const LoveNotes = ({notes, navigation}) => {
   const {security} = useSelector(state => state.ui);
   const dispatch = useDispatch();
-  const onViewNote = card => {
-    if (security.mode === 'pin' && card.security === true) {
-      dispatch(setModalPin(true))
-      dispatch(noteToPin(card));
-    } else if (security.mode === 'biometric' && card.security === true) {
-      onFingerPrint(card);
-    } else {
-      navigation.navigate('Notes', {screen: 'EditNote', params: {card}});
-    }
+  const onView = card => {
+    onViewNote(card, security, dispatch, navigation);
   };
-  const onFingerPrint = async card => {
-    try {
-      await FingerprintScanner.authenticate(msgFingerPrint);
-      FingerprintScanner.release();
-      navigation.navigate('Notes', {screen: 'EditNote', params: {card}});
-    } catch (error) {
-      FingerprintScanner.release();
-    }
-  };
-
   const CardLoveNotes = ({item}) => (
-    <TouchableOpacity onPress={() => onViewNote(item)}>
+    <TouchableOpacity onPress={() => onView(item)}>
       <View style={styles.containerCard}>
         <Text style={styles.titleCard}>{item.title}</Text>
         <Icon name="heart" size={50} color="#FC5C7D" />
       </View>
     </TouchableOpacity>
   );
-
   return (
     <View style={styles.container}>
       <SectionName text="I love it" />
