@@ -1,16 +1,24 @@
 import React from 'react';
-import {View, Text, StyleSheet} from 'react-native';
+import {View, Text, StyleSheet, TouchableOpacity} from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
+import {useDispatch, useSelector} from 'react-redux';
 import {SectionName} from './SectionName';
+import {onViewNote} from '../../helpers/fingerPrint';
 
-export const LoveNotes = ({notes}) => {
+export const LoveNotes = ({notes, navigation}) => {
+  const {security} = useSelector(state => state.ui);
+  const dispatch = useDispatch();
+  const onView = card => {
+    onViewNote(card, security, dispatch, navigation);
+  };
   const CardLoveNotes = ({item}) => (
-    <View style={styles.containerCard}>
-      <Text style={styles.titleCard}>{item.title}</Text>
-      <Icon name="heart" size={50} color="#FC5C7D" />
-    </View>
+    <TouchableOpacity onPress={() => onView(item)}>
+      <View style={styles.containerCard}>
+        <Text style={styles.titleCard}>{item.title}</Text>
+        <Icon name="heart" size={50} color="#FC5C7D" />
+      </View>
+    </TouchableOpacity>
   );
-
   return (
     <View style={styles.container}>
       <SectionName text="I love it" />

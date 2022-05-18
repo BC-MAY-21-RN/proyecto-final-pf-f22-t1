@@ -4,7 +4,7 @@ import {BtnDelete} from './BtnDelete';
 import {BtnEntry} from './BtnEntry';
 import {ModalRow} from './ModalRow';
 
-export const ActionPin = ({pin, setPin, setShowErrors, setShowModalPin, onChangePin, navigation}) => {
+export const ActionPin = ({pin, setPin, setShowErrors, onChangePin, navigation}) => {
   return (
     <View style={styles.containerNumbers}>
       <ModalRow number={0} onChangePin={onChangePin} />
@@ -13,7 +13,6 @@ export const ActionPin = ({pin, setPin, setShowErrors, setShowModalPin, onChange
         pin={pin}
         setPin={setPin}
         setShowErrors={setShowErrors}
-        setShowModalPin={setShowModalPin}
         navigation={navigation}
       />
     </View>

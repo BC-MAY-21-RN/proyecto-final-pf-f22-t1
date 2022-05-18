@@ -1,9 +1,13 @@
 import React from 'react';
 import {View, Image, Text, StyleSheet, TouchableOpacity} from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
+import {useDispatch} from 'react-redux';
+import {setModalPin} from '../../reducers/uiSlice';
 export const ModalMain = ({pin, setShowModalPin, setPin, setShowErrors}) => {
+  const dispatch = useDispatch();
   const onCloseModal = () => {
-    setShowModalPin(false);
+    // setShowModalPin(false);
+    dispatch(setModalPin(false));
     setPin('');
     setShowErrors(false);
   };

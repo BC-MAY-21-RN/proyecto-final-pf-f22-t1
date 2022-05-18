@@ -3,8 +3,9 @@ import {TouchableOpacity, Text} from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 import {useDispatch, useSelector} from 'react-redux';
 import { removeNoteToPin } from '../../reducers/notesSlice';
+import { setModalPin } from '../../reducers/uiSlice';
 import {stylesBtnPin} from './btnStyles';
-export const BtnEntry = ({pin, setPin, setShowErrors, setShowModalPin, navigation}) => {
+export const BtnEntry = ({pin, setPin, setShowErrors, navigation}) => {
   const {noteSecurity} = useSelector(state => state.notes);
   const {security} = useSelector(state => state.ui);
   const dispatch = useDispatch();
@@ -12,8 +13,8 @@ export const BtnEntry = ({pin, setPin, setShowErrors, setShowModalPin, navigatio
   const onVerifyPin = () => {
     if (pin.length < 4) return;
     if (pin === security.password) {
-      navigation.navigate('EditNote', {card: noteSecurity});
-      setShowModalPin(false);
+      navigation.navigate('Notes', {screen: 'EditNote', params: {card: noteSecurity}});
+      dispatch(setModalPin(false))
       dispatch(removeNoteToPin());
       setPin('');
     } else {

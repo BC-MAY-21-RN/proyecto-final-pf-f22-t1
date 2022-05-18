@@ -6,23 +6,21 @@ import {ButtonAddNotes} from '../../components/notes/ButtonAddNotes';
 import {ConditionalNotes} from '../../components/notes/ConditionalNotes';
 import {ModalPinNote} from '../../components/notes/ModalPinNote';
 import {PriorityNotes} from '../../components/notes/PriorityNotes';
-import { TitleNote } from '../../components/notes/TitleNote';
+import {TitleNote} from '../../components/notes/TitleNote';
 
 export const NotesScreen = ({navigation}) => {
   const {notes} = useSelector(state => state.notes);
-  const [showModalPin, setShowModalPin] = useState(false);
+  // const [showModalPin, setShowModalPin] = useState(false);
   return (
     <ContainerMain>
       <ScrollView showsVerticalScrollIndicator={false}>
         <View style={styles.container}>
           <TitleNote />
           <PriorityNotes />
-          <ConditionalNotes notes={notes} navigation={navigation} showModalPin={showModalPin} setShowModalPin={setShowModalPin}
-          />
+          <ConditionalNotes notes={notes} navigation={navigation} />
         </View>
       </ScrollView>
-      <ModalPinNote showModalPin={showModalPin} navigation={navigation} setShowModalPin={setShowModalPin}
-      />
+      <ModalPinNote navigation={navigation} />
       <ButtonAddNotes navigation={navigation} />
     </ContainerMain>
   );

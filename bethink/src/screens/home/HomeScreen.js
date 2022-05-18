@@ -7,7 +7,7 @@ import {getStorageSecurity} from '../../helpers/storageSecurity';
 import {removeSecurity, setSecurity} from '../../reducers/uiSlice';
 import {ContainerHome} from '../../components/home/ContainerHome';
 
-export const HomeScreen = () => {
+export const HomeScreen = ({navigation}) => {
   const {uid} = useSelector(state => state.auth);
   const dispatch = useDispatch();
   const getSecurity = async () => {
@@ -26,7 +26,7 @@ export const HomeScreen = () => {
   );
   return (
     <ContainerMain>
-      <ContainerHome />
+      <ContainerHome navigation={navigation} />
     </ContainerMain>
   );
 };
