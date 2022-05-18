@@ -4,7 +4,7 @@ import {StyleSheet} from 'react-native';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import {HomeScreen} from '../../screens/home/HomeScreen';
 import {NotesScreen} from '../../screens/notes/NotesScreen';
-import {RemindersScreenToDo} from '../../screens/reminders/RemindersScreenToDo';
+import {ReminderScreen} from '../../screens/reminder/Reminder';
 import {IconsTab} from '../../components/navigation/IconsTab';
 import {useSelector} from 'react-redux';
 
@@ -42,7 +42,7 @@ export const TabNavigation = () => {
         options={{title: 'Home'}}
       />
       <Tab.Screen name="Notes" component={NotesNavigation} />
-      <Tab.Screen name="Reminders" component={RemindersScreenToDo} />
+      <Tab.Screen name="Reminders" component={ReminderScreen} />
     </Tab.Navigator>
   );
 };
