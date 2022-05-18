@@ -22,6 +22,8 @@ const NotesNavigation = () => {
   );
 };
 
+/* here top tabs */
+
 export const TabNavigation = () => {
   const Tab = createBottomTabNavigator();
   const {mode} = useSelector(store => store.ui);
@@ -42,7 +44,7 @@ export const TabNavigation = () => {
         options={{title: 'Home'}}
       />
       <Tab.Screen name="Notes" component={NotesNavigation} />
-      <Tab.Screen name="Reminders" component={RemindersScreenToDo} />
+      <Tab.Screen name="Reminders" component={RemindersScreenToDo} /> {/* here component with navigation */}
     </Tab.Navigator>
   );
 };
