@@ -1,15 +1,16 @@
 import React from 'react';
 import {StyleSheet} from 'react-native';
-
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import {HomeScreen} from '../../screens/home/HomeScreen';
 import {NotesScreen} from '../../screens/notes/NotesScreen';
-import {ReminderScreen} from '../../screens/reminder/Reminder';
+import {RemindersScreenToDo} from '../../screens/reminders/RemindersScreenToDo';
+import {RemindersScreenDone} from '../../screens/reminders/ReminderScreensDone';
 import {IconsTab} from '../../components/navigation/IconsTab';
 import {useSelector} from 'react-redux';
-
+import {createMaterialTopTabNavigator} from '@react-navigation/material-top-tabs';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import {NewNoteScreen} from '../../screens/notes/NewNoteScreen';
+import {RemindersScreen} from '../../screens/reminders/RemindersScreen';
 
 const NotesNavigation = () => {
   const Stack = createNativeStackNavigator();
@@ -22,7 +23,20 @@ const NotesNavigation = () => {
   );
 };
 
-/* here top tabs */
+const ReminderScreen = () => {
+  const Tab = createMaterialTopTabNavigator();
+  return (
+    <Tab.Navigator
+      screenOptions={{
+        tabBarLabelStyle: {fontSize: 12},
+        //tabBarItemStyle: {width: 100},
+        tabBarStyle: {backgroundColor: 'powderblue'},
+      }}>
+      <Tab.Screen name="To Do" component={RemindersScreenToDo} />
+      <Tab.Screen name="Done" component={RemindersScreenDone} />
+    </Tab.Navigator>
+  );
+};
 
 export const TabNavigation = () => {
   const Tab = createBottomTabNavigator();
@@ -44,7 +58,8 @@ export const TabNavigation = () => {
         options={{title: 'Home'}}
       />
       <Tab.Screen name="Notes" component={NotesNavigation} />
-      <Tab.Screen name="Reminders" component={ReminderScreen} />
+      <Tab.Screen name="Reminder" component={ReminderScreen} />
+      <Tab.Screen name="Reminders" component={RemindersScreen} />
     </Tab.Navigator>
   );
 };

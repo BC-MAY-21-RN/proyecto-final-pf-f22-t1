@@ -4,7 +4,6 @@ import {StyleSheet, Text, ScrollView} from 'react-native';
 import {ContainerMain} from '../../components/home/ContainerMain';
 import {CardsReminders} from '../../components/reminders/CardsReminders';
 import {ButtonAddReminders} from '../../components/reminders/ButtonAddReminders';
-import {NavigationReminders} from '../../components/reminders/NavigationReminders';
 export const RemindersScreenToDo = () => {
   const {mode} = useSelector(state => state.ui);
   return (
@@ -12,7 +11,6 @@ export const RemindersScreenToDo = () => {
       <Text style={[styles.title, mode === 'light' && styles.titleLight]}>
         Reminders
       </Text>
-      <NavigationReminders />
       <ScrollView>
         <CardsReminders />
       </ScrollView>
