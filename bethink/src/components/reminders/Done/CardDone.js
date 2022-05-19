@@ -1,6 +1,5 @@
 import React from 'react';
-import {CardReminders} from './CardReminders';
-import {CardsDone} from './Done/CardsDone';
+import {CardsDone} from './CardsDone';
 
 const data = [
   {
@@ -35,8 +34,8 @@ const data = [
   },
 ];
 
-export const CardsReminders = () => {
-  const cards = data.map(card => <CardReminders key={card.id} card={card} />);
+export const CardDone = () => {
+  const cards = data.map(card => <CardsDone key={card.id} card={card} />);
 
   return cards;
 };

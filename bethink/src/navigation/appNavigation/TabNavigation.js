@@ -10,7 +10,7 @@ import {useSelector} from 'react-redux';
 import {createMaterialTopTabNavigator} from '@react-navigation/material-top-tabs';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import {NewNoteScreen} from '../../screens/notes/NewNoteScreen';
-import {RemindersScreen} from '../../screens/reminders/RemindersScreen';
+import {Text, View} from 'react-native';
 
 const NotesNavigation = () => {
   const Stack = createNativeStackNavigator();
@@ -25,16 +25,36 @@ const NotesNavigation = () => {
 
 const ReminderScreen = () => {
   const Tab = createMaterialTopTabNavigator();
+  const {mode} = useSelector(state => state.ui);
   return (
-    <Tab.Navigator
-      screenOptions={{
-        tabBarLabelStyle: {fontSize: 12},
-        //tabBarItemStyle: {width: 100},
-        tabBarStyle: {backgroundColor: 'powderblue'},
-      }}>
-      <Tab.Screen name="To Do" component={RemindersScreenToDo} />
-      <Tab.Screen name="Done" component={RemindersScreenDone} />
-    </Tab.Navigator>
+    <>
+      <View
+        style={[
+          styles.tabReminder,
+          mode === 'light' && styles.tabReminderLight,
+        ]}>
+        <Text style={[styles.title, mode === 'light' && styles.titleLight]}>
+          Reminders
+        </Text>
+      </View>
+      <Tab.Navigator
+        screenOptions={{
+          tabBarLabelStyle: {
+            fontSize: 18,
+            color: mode === 'light' ? 'black' : 'white',
+          },
+          tabBarStyle: {
+            backgroundColor: mode === 'light' ? 'white' : '#231E41',
+            borderColor: '#6A82FB',
+            borderWidth: 2,
+          },
+          tabBarActiveTintColor: '#e91e63',
+          tabBarIndicatorStyle: {backgroundColor: '#4FF8A7', height: 5},
+        }}>
+        <Tab.Screen name="To Do" component={RemindersScreenToDo} />
+        <Tab.Screen name="Done" component={RemindersScreenDone} />
+      </Tab.Navigator>
+    </>
   );
 };
 
@@ -58,8 +78,7 @@ export const TabNavigation = () => {
         options={{title: 'Home'}}
       />
       <Tab.Screen name="Notes" component={NotesNavigation} />
-      <Tab.Screen name="Reminder" component={ReminderScreen} />
-      <Tab.Screen name="Reminders" component={RemindersScreen} />
+      <Tab.Screen name="Reminders" component={ReminderScreen} />
     </Tab.Navigator>
   );
 };
@@ -72,5 +91,25 @@ const styles = StyleSheet.create({
   },
   tabLight: {
     backgroundColor: 'white',
+  },
+
+  title: {
+    color: 'white',
+    fontWeight: 'bold',
+    fontSize: 25,
+    alignSelf: 'center',
+    marginTop: 30,
+    marginBottom: 30,
+  },
+
+  tabReminder: {
+    backgroundColor: '#231E41',
+  },
+  tabReminderLight: {
+    backgroundColor: 'white',
+  },
+
+  titleLight: {
+    color: 'black',
   },
 });
