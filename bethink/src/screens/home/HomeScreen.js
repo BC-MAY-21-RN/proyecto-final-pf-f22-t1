@@ -1,43 +1,32 @@
-import React from 'react';
-import {View, Image, StyleSheet, ScrollView} from 'react-native';
+import React, {useCallback} from 'react';
+import {useFocusEffect} from '@react-navigation/native';
+import {useDispatch, useSelector} from 'react-redux';
+import {getAllNotes} from '../../actions/notes';
 import {ContainerMain} from '../../components/home/ContainerMain';
-import {Date} from '../../components/home/Date';
-import {DisplayUser} from '../../components/home/DisplayUser';
-import {LoveNotes} from '../../components/home/LoveNotes';
-import {Reminders} from '../../components/home/Reminders';
+import {getStorageSecurity} from '../../helpers/storageSecurity';
+import {removeSecurity, setSecurity} from '../../reducers/uiSlice';
+import {ContainerHome} from '../../components/home/ContainerHome';
 
-export const HomeScreen = () => {
+export const HomeScreen = ({navigation}) => {
+  const {uid} = useSelector(state => state.auth);
+  const dispatch = useDispatch();
+  const getSecurity = async () => {
+    const {mode, password = ''} = await getStorageSecurity();
+    if (!mode) {
+      dispatch(removeSecurity());
+    } else {
+      dispatch(setSecurity({mode, password}));
+    }
+  };
+  useFocusEffect(
+    useCallback(() => {
+      dispatch(getAllNotes(uid));
+      getSecurity();
+    }, []),
+  );
   return (
     <ContainerMain>
-      <ScrollView showsVerticalScrollIndicator={false}>
-        <View style={styles.container}>
-          <View style={styles.containerCenter}>
-            <Image
-              source={require('../../imgs/logo.png')}
-              style={styles.logo}
-            />
-          </View>
-          <DisplayUser />
-          <View style={styles.containerCenter}>
-            <Date />
-          </View>
-          <Reminders />
-          <LoveNotes />
-        </View>
-      </ScrollView>
+      <ContainerHome navigation={navigation} />
     </ContainerMain>
   );
 };
-
-const styles = StyleSheet.create({
-  containerCenter: {
-    alignItems: 'center',
-  },
-  logo: {
-    height: 80,
-    width: 150,
-  },
-  container: {
-    marginHorizontal: 20,
-  },
-});

@@ -8,15 +8,21 @@ import {
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import {useDispatch} from 'react-redux';
 import {logout} from '../../actions/auth';
+import {resetNotesState} from '../../reducers/notesSlice';
 export const CustomDrawer = props => {
   const dispatch = useDispatch();
+
+  const onLogout = () => {
+    dispatch(logout());
+    dispatch(resetNotesState());
+  };
   return (
     <DrawerContentScrollView {...props} style={styles.drawer}>
       <DrawerItemList {...props} />
       <DrawerItem
         style={styles.item}
         label="Log out"
-        onPress={() => dispatch(logout())}
+        onPress={onLogout}
         icon={() => <Ionicons name="log-out-outline" color="white" size={25} />}
         labelStyle={styles.labelTxt}
       />

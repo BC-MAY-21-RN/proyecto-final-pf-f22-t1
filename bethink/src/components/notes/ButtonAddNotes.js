@@ -2,9 +2,11 @@ import React from 'react';
 import {StyleSheet, TouchableOpacity} from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
 import Icon from 'react-native-vector-icons/Ionicons';
+import { heightScreen } from '../../helpers/heightScreen';
 export const ButtonAddNotes = ({navigation}) => {
+  const splitScreen = heightScreen()
   return (
-    <LinearGradient colors={['#FC5C7D', '#6A82FB']} style={styles.container}>
+    <LinearGradient colors={['#FC5C7D', '#6A82FB']} style={[styles.container, {top: splitScreen*8}]}>
       <TouchableOpacity onPress={() => navigation.navigate('NewNote')}>
         <Icon name="add-outline" size={50} color="white" />
       </TouchableOpacity>
@@ -20,7 +22,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     position: 'absolute',
-    top: 650,
+    //top: 650,
     left: 300,
   },
 });
