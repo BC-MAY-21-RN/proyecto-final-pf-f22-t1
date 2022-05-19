@@ -12,15 +12,25 @@ import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import {NewNoteScreen} from '../../screens/notes/NewNoteScreen';
 import {EditNoteScreen} from '../../screens/notes/EditNoteScreen';
 
+import {CommonActions} from '@react-navigation/native';
+
 const NotesNavigation = () => {
   const Stack = createNativeStackNavigator();
-
   return (
     <Stack.Navigator screenOptions={{headerShown: false}}>
       <Stack.Screen name="NotesMain" component={NotesScreen} />
       <Stack.Screen name="NewNote" component={NewNoteScreen} />
       <Stack.Screen name="EditNote" component={EditNoteScreen} />
     </Stack.Navigator>
+  );
+};
+
+const onBlurNotes = navigation => {
+  return navigation.dispatch(
+    CommonActions.reset({
+      index: 1,
+      routes: [{name: 'NotesMain'}],
+    }),
   );
 };
 
@@ -43,7 +53,13 @@ export const TabNavigation = () => {
         component={HomeScreen}
         options={{title: 'Home'}}
       />
-      <Tab.Screen name="Notes" component={NotesNavigation} />
+      <Tab.Screen
+        name="Notes"
+        component={NotesNavigation}
+        listeners={({navigation}) => ({
+          blur: () => onBlurNotes(navigation),
+        })}
+      />
       <Tab.Screen name="Reminders" component={RemindersScreen} />
     </Tab.Navigator>
   );

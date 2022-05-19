@@ -22,7 +22,6 @@ export const onViewNote = (card, security, dispatch, navigation) => {
   } else if (security.mode === 'biometric' && card.security === true) {
     onFingerPrint(card, navigation);
   } else {
-    navigation();
     navigation.navigate('Notes', {screen: 'EditNote', params: {card}});
   }
 };

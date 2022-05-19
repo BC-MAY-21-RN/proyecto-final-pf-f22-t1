@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React from 'react';
 import {View, StyleSheet, ScrollView} from 'react-native';
 import {useSelector} from 'react-redux';
 import {ContainerMain} from '../../components/home/ContainerMain';
@@ -8,9 +8,9 @@ import {ModalPinNote} from '../../components/notes/ModalPinNote';
 import {PriorityNotes} from '../../components/notes/PriorityNotes';
 import {TitleNote} from '../../components/notes/TitleNote';
 
+
 export const NotesScreen = ({navigation}) => {
   const {notes} = useSelector(state => state.notes);
-  // const [showModalPin, setShowModalPin] = useState(false);
   return (
     <ContainerMain>
       <ScrollView showsVerticalScrollIndicator={false}>
