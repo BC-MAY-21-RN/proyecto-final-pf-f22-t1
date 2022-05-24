@@ -20,3 +20,18 @@ export const getDateHome = () => {
     year,
   };
 };
+
+export const getDateBy = date => {
+  const day = dayjs(date).format('DD/MMMM/YYYY');
+  const dayFormat = day.replace('/', ' ').replace('/', ', ');
+
+  return dayFormat;
+};
+
+export const getTimeBy = date => {
+  const time = dayjs(date).format('DD/MMMM/YYYY:HH:mm a');
+  const [, hours, minutes] = time.split(':');
+  const timeFormat = `${hours}:${minutes}`;
+
+  return timeFormat;
+};

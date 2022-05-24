@@ -3,13 +3,13 @@ import {ScrollView} from 'react-native';
 import {ContainerMain} from '../../components/home/ContainerMain';
 import {CardsReminders} from '../../components/reminders/CardsReminders';
 import {ButtonAddReminders} from '../../components/reminders/ButtonAddReminders';
-export const RemindersScreenToDo = () => {
+export const RemindersScreenToDo = ({navigation}) => {
   return (
     <ContainerMain>
       <ScrollView>
         <CardsReminders />
       </ScrollView>
-      <ButtonAddReminders />
+      {/* <ButtonAddReminders navigation={navigation} /> */}
     </ContainerMain>
   );
 };
