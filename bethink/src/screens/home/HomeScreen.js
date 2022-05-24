@@ -6,6 +6,7 @@ import {ContainerMain} from '../../components/home/ContainerMain';
 import {getStorageSecurity} from '../../helpers/storageSecurity';
 import {removeSecurity, setSecurity} from '../../reducers/uiSlice';
 import {ContainerHome} from '../../components/home/ContainerHome';
+import {getAllReminders} from '../../actions/reminders';
 
 export const HomeScreen = ({navigation}) => {
   const {uid} = useSelector(state => state.auth);
@@ -21,6 +22,7 @@ export const HomeScreen = ({navigation}) => {
   useFocusEffect(
     useCallback(() => {
       dispatch(getAllNotes(uid));
+      dispatch(getAllReminders(uid));
       getSecurity();
     }, []),
   );

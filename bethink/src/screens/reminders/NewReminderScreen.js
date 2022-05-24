@@ -1,21 +1,29 @@
 import React, {useState} from 'react';
-import {ScrollView, StyleSheet, TextInput} from 'react-native';
+import {ScrollView, StyleSheet} from 'react-native';
 import {ContainerMain} from '../../components/home/ContainerMain';
 import {BtnAddReminder} from '../../components/reminders/BtnAddReminder';
 import {DateReminder} from '../../components/reminders/DateReminder';
 import {ModalCompleteReminders} from '../../components/reminders/ModalCompleteReminders';
 import {TitleReminder} from '../../components/reminders/TitleReminder';
 
-export const NewReminderScreen = () => {
+export const NewReminderScreen = ({navigation}) => {
   const [title, setTitle] = useState('');
   const [date, setDate] = useState(new Date());
   const [errors, setErrors] = useState(false);
+
+
   return (
     <ContainerMain>
       <ScrollView style={styles.container}>
         <TitleReminder title={title} setTitle={setTitle} />
         <DateReminder date={date} setDate={setDate} />
-        <BtnAddReminder title={title} date={date} setErrors={setErrors} />
+        <BtnAddReminder
+          title={title}
+          date={date}
+          setErrors={setErrors}
+          navigation={navigation}
+          setTitle={setTitle}
+        />
       </ScrollView>
       <ModalCompleteReminders errors={errors} setErrors={setErrors} />
     </ContainerMain>

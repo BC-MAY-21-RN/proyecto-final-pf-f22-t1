@@ -1,18 +1,34 @@
 import React from 'react';
 import {StyleSheet, TouchableOpacity, Text} from 'react-native';
+import {useSelector} from 'react-redux';
 import LinearGradient from 'react-native-linear-gradient';
-import {getDateBy, getTimeBy} from '../../helpers/getDate';
+import firestore from '@react-native-firebase/firestore';
 
-export const BtnAddReminder = ({title, date, setErrors}) => {
+export const BtnAddReminder = ({
+  title,
+  date,
+  setErrors,
+  navigation,
+  setTitle,
+}) => {
+  const {uid} = useSelector(state => state.auth);
+  const onSaveFirebase = async () => {
+    try {
+      await firestore()
+        .collection('Reminders')
+        .add({title, date, user: uid, status: false});
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   const onSend = () => {
     if (title.length <= 0) {
       setErrors(true);
     } else {
-      const dataReminder = {
-        title,
-        date,
-      };
-      console.log(dataReminder);
+      onSaveFirebase();
+      navigation.navigate('HomeAPP');
+      setTitle('');
     }
   };
 

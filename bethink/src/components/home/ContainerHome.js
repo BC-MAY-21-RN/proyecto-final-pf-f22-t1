@@ -6,6 +6,7 @@ import {SectionMain} from './SectionMain';
 import {ModalPinNote} from '../notes/ModalPinNote';
 
 export const ContainerHome = ({navigation}) => {
+  // console.log(dayjs.unix(reminders[0].date.seconds));
   return (
     <>
       <ScrollView showsVerticalScrollIndicator={false}>
