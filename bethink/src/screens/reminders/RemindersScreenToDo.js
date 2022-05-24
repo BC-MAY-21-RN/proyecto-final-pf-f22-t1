@@ -7,7 +7,7 @@ import {NoTodo} from '../../components/reminders/NoTodo';
 export const RemindersScreenToDo = () => {
   const {reminders} = useSelector(state => state.reminders);
 
-  const remindersTodo = reminders.filter(reminder => reminder.status == 'lol');
+  const remindersTodo = reminders.filter(reminder => reminder.status == false);
 
   return (
     <ContainerMain>

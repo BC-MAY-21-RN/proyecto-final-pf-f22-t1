@@ -36,8 +36,16 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     backgroundColor: '#FFFFFF',
     flexDirection: 'row',
-    borderWidth: 2,
-    borderColor: '#FC5C7D',
+
+    shadowColor: 'red',
+    shadowOffset: {
+      width: 0,
+      height: 6,
+    },
+    shadowOpacity: 0.5,
+    shadowRadius: 10.49,
+
+    elevation: 12,
   },
   title: {
     color: 'black',

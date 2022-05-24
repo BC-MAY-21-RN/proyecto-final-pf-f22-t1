@@ -1,7 +1,11 @@
 import React from 'react';
 import {View, StyleSheet, Text, Image} from 'react-native';
+import dayjs from 'dayjs';
+import {getDateBy} from '../../../helpers/getDate';
 
 export const CardsDone = ({card}) => {
+  const {date} = card;
+  const formatDate = dayjs.unix(date.seconds);
   return (
     <View style={styles.containerCard}>
       <Image
@@ -11,7 +15,7 @@ export const CardsDone = ({card}) => {
       <View style={styles.containerTitle}>
         <Text style={styles.title}>{card.title}</Text>
       </View>
-      <Text style={styles.date}>{card.date}</Text>
+      <Text style={styles.date}>{getDateBy(formatDate)}</Text>
     </View>
   );
 };
