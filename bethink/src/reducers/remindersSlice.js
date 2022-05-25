@@ -6,6 +6,7 @@ export const remindersSlice = createSlice({
   initialState: {
     reminders: [],
     loadingReminders: true,
+    modalEdit: false,
     reminderEdit: [],
   },
   reducers: {

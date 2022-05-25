@@ -9,6 +9,8 @@ import {closeModalEdit} from '../../reducers/remindersSlice';
 import {BtnAEditReminder} from './BtnEditReminder';
 import {ModalCompleteReminders} from './ModalCompleteReminders';
 import {StatusReminder} from './StatusReminder';
+import {BtnDeleteReminder} from './BtnDeleteReminder';
+import {ModalDeleteReminder} from './ModalDeleteReminder';
 
 export const ModalEdit = ({navigation}) => {
   const {modalEdit, reminderEdit} = useSelector(state => state.reminders);
@@ -20,6 +22,7 @@ export const ModalEdit = ({navigation}) => {
   const [dateReminder, setDateReminder] = useState(new Date());
   const [errors, setErrors] = useState(false);
   const [statusReminder, setStatusReminder] = useState(false);
+  const [showModalDelete, setShowModalDelete] = useState(false);
 
   useEffect(() => {
     setTitleReminder(title);
@@ -48,6 +51,7 @@ export const ModalEdit = ({navigation}) => {
             statusReminder={statusReminder}
             setStatusReminder={setStatusReminder}
           />
+          <BtnDeleteReminder setShowModalDelete={setShowModalDelete} />
           <BtnAEditReminder
             title={titleReminder}
             date={dateReminder}
@@ -58,6 +62,12 @@ export const ModalEdit = ({navigation}) => {
             statusReminder={statusReminder}
           />
           <ModalCompleteReminders errors={errors} setErrors={setErrors} />
+          <ModalDeleteReminder
+            showModalDelete={showModalDelete}
+            setShowModalDelete={setShowModalDelete}
+            navigation={navigation}
+            id={id}
+          />
         </View>
       </ContainerMain>
     </Modal>
