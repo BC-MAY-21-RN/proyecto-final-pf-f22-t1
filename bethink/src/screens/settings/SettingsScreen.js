@@ -29,7 +29,7 @@ export const SettingsScreen = () => {
         <Text style={[styles.title, mode === 'light' && styles.titleLight]}>
           Settings
         </Text>
-        <SectionName text="Securitys" />
+        <SectionName text="Security" />
         <SecureSettings
           swithSecurity={swithSecurity}
           setSwithSecurity={setSwithSecurity}

@@ -1,9 +1,12 @@
 import React from 'react';
 import {View, StyleSheet, Text, Image} from 'react-native';
-import Icon from 'react-native-vector-icons/Ionicons';
+import dayjs from 'dayjs';
+import {getDateBy, getTimeBy} from '../../helpers/getDate';
 
 export const CardReminders = ({card}) => {
-  const timeReminder = card.time.split(' ');
+  const {date} = card;
+  const formatDate = dayjs.unix(date.seconds);
+  const [time, amORpm] = getTimeBy(formatDate).split(' ');
   return (
     <View style={styles.containerCard}>
       <Image
@@ -12,11 +15,11 @@ export const CardReminders = ({card}) => {
       />
       <View style={styles.containerTitle}>
         <Text style={styles.title}>{card.title}</Text>
-        <Text>{card.date}</Text>
+        <Text style={styles.txtDate}>{getDateBy(formatDate)}</Text>
       </View>
       <View>
-        <Text style={styles.time}>{timeReminder[0]}</Text>
-        <Text style={styles.meridian}>{timeReminder[1]}</Text>
+        <Text style={styles.time}>{time}</Text>
+        <Text style={styles.meridian}>{amORpm}</Text>
       </View>
     </View>
   );
@@ -33,8 +36,16 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     backgroundColor: '#FFFFFF',
     flexDirection: 'row',
-    borderWidth: 2,
-    borderColor: '#FC5C7D',
+
+    shadowColor: 'red',
+    shadowOffset: {
+      width: 0,
+      height: 6,
+    },
+    shadowOpacity: 0.5,
+    shadowRadius: 10.49,
+
+    elevation: 12,
   },
   title: {
     color: 'black',
@@ -64,5 +75,8 @@ const styles = StyleSheet.create({
     fontSize: 20,
     color: '#FC5C7D',
     alignSelf: 'center',
+  },
+  txtDate: {
+    color: 'grey',
   },
 });

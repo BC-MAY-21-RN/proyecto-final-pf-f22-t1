@@ -9,12 +9,14 @@ import Ionicons from 'react-native-vector-icons/Ionicons';
 import {useDispatch} from 'react-redux';
 import {logout} from '../../actions/auth';
 import {resetNotesState} from '../../reducers/notesSlice';
+import {resetRemindersState} from '../../reducers/remindersSlice';
 export const CustomDrawer = props => {
   const dispatch = useDispatch();
 
   const onLogout = () => {
     dispatch(logout());
     dispatch(resetNotesState());
+    dispatch(resetRemindersState());
   };
   return (
     <DrawerContentScrollView {...props} style={styles.drawer}>
