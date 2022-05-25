@@ -1,13 +1,21 @@
 import React from 'react';
-import {View, StyleSheet, Text, Image} from 'react-native';
+import {View, StyleSheet, Text, Image, TouchableOpacity} from 'react-native';
 import dayjs from 'dayjs';
+import { useDispatch } from 'react-redux';
 import {getDateBy} from '../../../helpers/getDate';
+import { openModalEdit, setReminderEdit } from '../../../reducers/remindersSlice';
 
 export const CardsDone = ({card}) => {
   const {date} = card;
   const formatDate = dayjs.unix(date.seconds);
+  const dispatch = useDispatch();
+  
+  const onEdit = () => {
+    dispatch(setReminderEdit({...card, date: formatDate}));
+    dispatch(openModalEdit());
+  };
   return (
-    <View style={styles.containerCard}>
+    <TouchableOpacity style={styles.containerCard} onPress={onEdit}>
       <Image
         source={require('../../../imgs/reminder/check.png')}
         style={styles.check}
@@ -16,7 +24,7 @@ export const CardsDone = ({card}) => {
         <Text style={styles.title}>{card.title}</Text>
       </View>
       <Text style={styles.date}>{getDateBy(formatDate)}</Text>
-    </View>
+    </TouchableOpacity>
   );
 };
 
