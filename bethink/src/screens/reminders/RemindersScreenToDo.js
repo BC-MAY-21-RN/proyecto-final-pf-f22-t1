@@ -4,7 +4,9 @@ import {useSelector} from 'react-redux';
 import {ContainerMain} from '../../components/home/ContainerMain';
 import {CardsReminders} from '../../components/reminders/CardsReminders';
 import {NoTodo} from '../../components/reminders/NoTodo';
-export const RemindersScreenToDo = () => {
+import {ModalEdit} from '../../components/reminders/ModalEdit';
+
+export const RemindersScreenToDo = ({navigation}) => {
   const {reminders} = useSelector(state => state.reminders);
 
   const remindersTodo = reminders.filter(reminder => reminder.status == false);
@@ -18,6 +20,7 @@ export const RemindersScreenToDo = () => {
           <NoTodo />
         )}
       </ScrollView>
+      <ModalEdit navigation={navigation} />
     </ContainerMain>
   );
 };
