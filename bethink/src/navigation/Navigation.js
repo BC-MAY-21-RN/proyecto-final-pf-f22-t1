@@ -5,6 +5,7 @@ import auth from '@react-native-firebase/auth';
 import {useDispatch, useSelector} from 'react-redux';
 import {login} from '../reducers/authSlice';
 import {AppNavigation} from './appNavigation/AppNavigation';
+import SplashScreen from 'react-native-splash-screen'
 
 const Stack = createNativeStackNavigator();
 
@@ -21,6 +22,7 @@ export const Navigation = () => {
   const dispatch = useDispatch();
   const {uid} = useSelector(state => state.auth);
   useEffect(() => {
+    SplashScreen.hide();
     auth().onAuthStateChanged(user => {
       if (user?.uid) {
         dispatch(login(user));
