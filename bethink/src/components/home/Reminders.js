@@ -1,44 +1,60 @@
 import React from 'react';
 import {View, Text, StyleSheet, FlatList} from 'react-native';
+import dayjs from 'dayjs';
+import {useSelector} from 'react-redux';
 import LinearGradient from 'react-native-linear-gradient';
 import {SectionName} from './SectionName';
+import {getDateBy, getTimeBy} from '../../helpers/getDate';
+import {NoMore} from './NoMore';
+import {LoadingReminders} from './LoadingReminders';
+import {NoReminders} from './NoReminders';
 
-const data = [
-  {
-    id: '1',
-    time: '9:00 a.m',
-    activity: 'Sciences exam',
-  },
-  {
-    id: '2',
-    time: '1:30 p.m',
-    activity: 'Go to the store',
-  },
-  {
-    id: '3',
-    time: '7:30 a.m',
-    activity: 'Dinner with Dania',
-  },
-];
+
 export const Reminders = () => {
-  const cardReminders = ({item}) => (
-    <LinearGradient
-      colors={['#CC2B5E', '#0ABFBC']}
-      style={styles.containerCard}>
-      <Text style={styles.txtTime}>{item.time}</Text>
-      <Text style={styles.txtAct}>{item.activity}</Text>
-    </LinearGradient>
-  );
+  const {reminders, loadingReminders} = useSelector(state => state.reminders);
+  const remindersFormat = reminders.map(reminder => {
+    const formatDate = dayjs.unix(reminder.date.seconds);
+    return {
+      ...reminder,
+      date: formatDate,
+    };
+  });
+
+  const remindersForToday = remindersFormat.filter(reminder => {
+    const today = getDateBy(new Date());
+    const dayReminder = getDateBy(reminder.date);
+    return dayReminder === today;
+  });
+
+  const cardReminders = ({item}) => {
+    const [time, amOrPm] = getTimeBy(item.date).split(' ');
+    return (
+      <LinearGradient
+        colors={['#CC2B5E', '#0ABFBC']}
+        style={styles.containerCard}>
+        <Text style={styles.txtTime}>{time}</Text>
+        <Text style={styles.txtTime}>{amOrPm}</Text>
+        <Text style={styles.txtAct}>{item.title}</Text>
+      </LinearGradient>
+    );
+  };
 
   return (
     <View style={styles.container}>
       <SectionName text="Reminders for today" />
-      <FlatList
-        data={data}
-        keyExtractor={item => item.id}
-        renderItem={cardReminders}
-        horizontal
-      />
+      {loadingReminders ? (
+        <LoadingReminders />
+      ) : remindersForToday.length > 0 ? (
+        <FlatList
+          data={remindersForToday}
+          keyExtractor={item => item.id}
+          renderItem={cardReminders}
+          horizontal
+          ListFooterComponent={<NoMore />}
+        />
+      ) : (
+        <NoReminders />
+      )}
     </View>
   );
 };

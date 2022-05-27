@@ -33,15 +33,15 @@ una interfaz cómoda para que el usuario realice sus actividades de manera senci
 
 - Permitir al usuario agregar recordatorios:
   - El usuario podrá agregar recordatorios a la aplicación.
-  - El usuario podrá seleccionar la prioridad del recordatorio entre alta, mediana o baja.
 
 - El usuario podrá ver un calendario con sus recordatorios.
 - El usuario podrá darle "corazón" a sus notas para tenerlas destacadas.
 - El usuario podrá navegar en la aplicación mediante secciones de notas o recordatorios.
-- El usuario tendrá podrá ver sus notas o recordatorios con el color con base a su prioridad.
-- El usuario podrá acceder a las notas o recordatorios dependiendo su prioridad.
+- El usuario podrá ver sus notas con el color con base a su prioridad.
+- El usuario podrá ver sus recodatorios con base a si está en "to do" o "done"
+- El usuario podrá editar y eliminar una nota.
+- El usuario podrá editar y eliminar un recordatorio.
 
-- El usuario podrá tomar una foto desde su dispositivo o seleccionar una imagen de su galería para que la nota o recordatorio sea más específica.
 
 
 ### Requerimientos no funcionales
@@ -49,8 +49,6 @@ una interfaz cómoda para que el usuario realice sus actividades de manera senci
    - La información se guardará en firebase.
  - Calidad
    - Utilizar un estilo de código estandarizado (revisado por Eslint).
-   - Incluir pruebas unitarias.
-   - Puntuación **A** obtenida en CodeClimate.
 - Ejecución 
    - Puede ejecutarse en Android o iOs.
 - Código fuente
